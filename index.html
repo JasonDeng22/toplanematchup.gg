@@ -3,113 +3,141 @@
 Sources used: https://bbbootstrap.com/snippets/bootstrap-5-search-bar-microphone-icon-inside-12725910
 -->
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Yun, Jason Deng" />
+    <meta name="description" content="Sprint 2 Website" />
+    <meta name="keywords" content="League of Legends, Top Lane, Matchups" />
 
-  <meta name="author" content="John Yun, Jason Deng" />
-  <meta name="description" content="Sprint 2 Website" />
-  <meta name="keywords" content="League of Legends, Top Lane, Matchups" />
+    <title>TOPMATCHUPS.GG</title>
 
-  <title>TOPMATCHUPS.GG</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/less@4"></script>
+  </head>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
-  <link rel="stylesheet" href="main.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/less@4"></script>
-</head>
-
-<body style="background-color: gray">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-xl">
-      <a class="navbar-brand" href="#">TOPMATCHUPS.GG</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Matchup Of The Day</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Champions</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Discussions Forum</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">FAQ</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">About Us</a>
-          </li>
-        </ul>
-        <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">
-            Login
-          </button>
-          <button type="button" class="btn btn-warning">Sign-up</button>
+  <body
+    style="background-image: url(backgrounds/champ.gif); background-size: cover"
+  >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-xl">
+        <a class="navbar-brand" href="#">TOPMATCHUPS.GG</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#"
+                >Matchup Of The Day</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">Champions</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#"
+                >Discussions Forum</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">About Us</a>
+            </li>
+          </ul>
+          <div class="text-end">
+            <button type="button" class="btn btn-outline-light me-2">
+              Login
+            </button>
+            <button type="button" class="btn btn-warning">Sign-up</button>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
-  <div class="container-xl">
-    <div class="row">
-      <div>
-        <h1 class="text-light" id="title">TOPMATCHUPS.GG</h1>
-      </div>
-      <div>
-        <h2 class="text-light" id="subtitle">
-          Become a pro top laner today!
-        </h2>
-      </div>
-      <div class="container" style="padding-bottom: 25vh">
-        <div class="row height d-flex justify-content-center align-items-center">
-          <div class="col-md-6">
-            <div class="form">
-              <i class="fa fa-search"></i>
-              <input type="text" class="form-control form-input" placeholder="Search any champion" />
-              <span class="left-pan"><i class="fa fa-microphone"></i></span>
+    </nav>
+    <div class="container-xl">
+      <div class="row">
+        <div>
+          <h1 class="text-light" id="title">TOPMATCHUPS.GG</h1>
+        </div>
+        <div>
+          <h2 class="text-light" id="subtitle">
+            Become a pro top laner today!
+          </h2>
+        </div>
+        <div class="container" style="padding-bottom: 25vh">
+          <div
+            class="row height d-flex justify-content-center align-items-center"
+          >
+            <div class="col-md-6">
+              <div class="form">
+                <i class="fa fa-search"></i>
+                <input
+                  type="text"
+                  class="form-control form-input"
+                  placeholder="Search any champion"
+                />
+                <span class="left-pan"><i class="fa fa-microphone"></i></span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- FOOTER -->
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top bg-dark">
-    <p class="col-md-4 mb-0 text-muted">&copy; 2022 John Yun & Jason Deng</p>
-    <ul class="nav col-md-8 justify-content-end">
-      <li class="nav-item">
-        <a href="#" class="nav-link px-2 text-muted">Home</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link px-2 text-muted">Matchip Of The Day</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link px-2 text-muted">Champions</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link px-2 text-muted">Discussions Forum</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link px-2 text-muted">FAQ</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link px-2 text-muted">About Us</a>
-      </li>
-    </ul>
-  </footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-    crossorigin="anonymous"></script>
-</body>
-
+    <!-- FOOTER -->
+    <footer
+      class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top bg-dark"
+    >
+      <p class="col-md-4 mb-0 text-muted">&copy; 2022 John Yun & Jason Deng</p>
+      <ul class="nav col-md-8 justify-content-end">
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-muted">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-muted">Matchip Of The Day</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-muted">Champions</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-muted">Discussions Forum</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-muted">FAQ</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-muted">About Us</a>
+        </li>
+      </ul>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
