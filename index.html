@@ -3,6 +3,7 @@
 Sources used: 
 -->
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,11 +17,12 @@ Sources used:
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet/less" type="text/css" href="styles.less" />
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/less@4"></script>
 </head>
 
-<body>
+<body style="background-color: gray;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-xl">
             <a class="navbar-brand" href="#">TOPMATCHUPS.GG</a>
@@ -60,14 +62,24 @@ Sources used:
     <div class="container-xl">
         <div class="row">
             <div>
-                <h1 class="textCenter">TOPMATCHUPS.GG</h1>
+                <h1 class="text-light" id="title">TOPMATCHUPS.GG</h1>
+            </div>
+            <div>
+                <h2 class="text-light" id="subtitle">Become a pro top laner today!</h2>
+            </div>
+            <div class="container">
+                <div class="row height d-flex justify-content-center align-items-center">
+                    <div class="col-md-6">
+                        <div class="form">
+                            <i class="fa fa-search"></i>
+                            <input type="text" class="form-control form-input" placeholder="Search any champion" />
+                            <span class="left-pan"><i class="fa fa-microphone"></i></span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <div id="header">test</div>
-
-    <h2>test h2</h2>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
