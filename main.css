@@ -48,14 +48,14 @@ html * {
 
 #title {
     text-align: center;
-    font-size: 4.5em;
+    font-size: 5vw;
     padding-top: 35vh;
     font-weight: bolder;
 }
 
 #subtitle {
     text-align: center;
-    font-size: 2em;
+    font-size: 2vw;
     font-weight: bolder;
     padding-top: 10px;
 }
@@ -104,4 +104,20 @@ body {
 .form-input:focus {
     box-shadow: none;
     border: none;
+}
+
+@media (max-width: 767.98px) {
+    #title {
+    text-align: center;
+    font-size: 2em;
+    padding-top: 35vh;
+    font-weight: bolder;
+    }
+
+    #subtitle {
+    text-align: center;
+    font-size: 1em;
+    font-weight: bolder;
+    padding-top: 10px;
+    }
 }
