@@ -1,3 +1,94 @@
+/*https://www.delftstack.com/howto/css/darken-background-image-css/#:~:text=size%3A%20cover%3B%20%7D-,Use%20the%20background%2Dblend%2Dmode%20Property%20to%20Darken%20Background%20Image,blending%20mode%20of%20the%20background. */
+
 h1 {
   color: white;
+}
+.form {
+  position: relative;
+}
+/* Search Bar */
+.form .fa-search {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #9ca3af;
+}
+
+.form span {
+  position: absolute;
+  right: 17px;
+  top: 13px;
+  padding: 2px;
+  border-left: 1px solid #d1d5db;
+}
+
+.left-pan {
+  padding-left: 7px;
+}
+
+.left-pan i {
+  padding-left: 10px;
+}
+
+.form-input {
+  height: 55px;
+  text-indent: 33px;
+  border-radius: 10px;
+}
+
+.form-input:focus {
+  box-shadow: none;
+  border: none;
+}
+
+/* h1 title */
+.dftitle {
+  color: white;
+  font-size: 4vw;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+/* Cards */
+img {
+  padding-top: 5px;
+  width: auto;
+  box-shadow: 0px 0px 20px black;
+}
+.card {
+  background-color: rgb(30, 30, 30);
+  padding-top: 20px;
+  padding-bottom: 0px;
+}
+
+.card-body {
+  padding-bottom: 0px;
+  margin-bottom: 10px;
+}
+
+.card-body h5 {
+  color: lightgray;
+  text-align: center;
+  padding-bottom: 0px;
+}
+
+.card:hover {
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 2px;
+  border-color: #ffc400;
+}
+
+.links {
+  color: lightgray;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.links:hover {
+  font-weight: bolder;
+  color: #ffc400;
+  text-decoration: underline;
 }
