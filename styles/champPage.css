@@ -1,6 +1,24 @@
-.jumbo h1 {
-  color: rgb(88, 0, 0);
+@media (max-width: 767.98px) {
+  .jumbo h1 {
+    color: rgb(88, 0, 0);
+    font-size: calc(1.425rem + 2.1vw);
+  }
+  .jumbo p {
+    color: rgb(219, 219, 219);
+    font-size: 100%;
+  }
 }
-.jumbo p {
-  color: rgb(219, 219, 219);
+
+@media (min-width: 767.98px) {
+  .jumbo h1 {
+    color: rgb(88, 0, 0);
+    font-size: calc(1.425rem + 2.1vw);
+    font-weight: 300;
+    line-height: 1.2;
+  }
+  .jumbo p {
+    color: rgb(219, 219, 219);
+    font-size: 8px;
+    font-size: 1.5rem !important;
+  }
 }
