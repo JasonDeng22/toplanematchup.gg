@@ -50,6 +50,9 @@ h1 {
   margin-bottom: 30px;
 }
 
+body {
+  background-color: rgb(30, 30, 30);
+}
 /* Cards */
 img {
   padding-top: 5px;
@@ -60,6 +63,7 @@ img {
   background-color: rgb(30, 30, 30);
   padding-top: 20px;
   padding-bottom: 0px;
+  border: none;
 }
 
 .card-body {
@@ -91,4 +95,14 @@ img {
   font-weight: bolder;
   color: #ffc400;
   text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .dftitle {
+    color: white;
+    font-size: 10vw;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }

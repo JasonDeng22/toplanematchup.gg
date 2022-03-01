@@ -1,24 +1,106 @@
+body {
+  background-color: rgb(30, 30, 30);
+}
+
+.jumbo {
+  margin-top: 3vh;
+  background: rgba(10, 10, 10, 0.6) url("../champArt/Aatrox.jpg");
+  background-size: cover;
+  background-blend-mode: darken;
+  margin-bottom: 3vh;
+}
+.jumbo h1 {
+  color: rgb(88, 0, 0);
+  font-size: calc(1.425rem + 2.1vw);
+  font-weight: 300;
+  line-height: 1.2;
+}
+.jumbo p {
+  color: rgb(219, 219, 219);
+  font-size: 8px;
+  font-size: 1.5rem;
+}
 @media (max-width: 767.98px) {
+  .jumbo {
+    background-image: url("../champArt/Aatrox.jpg");
+    background-size: cover;
+  }
   .jumbo h1 {
     color: rgb(88, 0, 0);
     font-size: calc(1.425rem + 2.1vw);
   }
   .jumbo p {
     color: rgb(219, 219, 219);
-    font-size: 100%;
+    font-size: 1em !important;
   }
 }
 
-@media (min-width: 767.98px) {
-  .jumbo h1 {
-    color: rgb(88, 0, 0);
-    font-size: calc(1.425rem + 2.1vw);
-    font-weight: 300;
-    line-height: 1.2;
-  }
-  .jumbo p {
-    color: rgb(219, 219, 219);
-    font-size: 8px;
-    font-size: 1.5rem !important;
-  }
+/* Matchups */
+.card {
+  border: none;
+  background-color: rgb(7, 7, 32);
+  margin-bottom: 60px;
+}
+
+.card-head {
+  text-align: center;
+}
+.card h2 {
+  font-size: calc(1rem + 1.5vw);
+  color: rgb(206, 206, 206);
+}
+
+.card h3 {
+  margin-top: 20px;
+  font-size: calc(1rem);
+  color: rgb(165, 165, 165);
+}
+
+.container p {
+  color: rgb(255, 255, 255);
+  font-size: calc(1.425rem + 2.1vw);
+  text-align: center;
+  font-weight: bolder;
+  margin: 15px 0px 20px 0px;
+  align-items: center;
+}
+.card-body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.matchup-card {
+  width: 33%;
+  align-items: center;
+  text-align: center;
+}
+
+a.name {
+  font-size: 100%;
+  color: #ffc400;
+  margin-bottom: 5px;
+  text-decoration: none;
+  font-weight: bolder;
+}
+
+a.name:hover {
+  text-decoration: underline;
+}
+p.winRate {
+  font-size: 70%;
+
+  margin: 0px;
+}
+.matchup-card img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.matchup-card:hover {
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 2px;
+  border-color: #ffc400;
 }
