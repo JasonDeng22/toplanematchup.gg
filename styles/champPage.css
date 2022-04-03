@@ -3,14 +3,14 @@ body {
 }
 
 .jumbo {
-  margin-top: 3vh;
+  margin-top: 4vh;
   background: rgba(10, 10, 10, 0.6) url("../champArt/Aatrox.jpg");
   background-size: cover;
   background-blend-mode: darken;
-  margin-bottom: 3vh;
+  margin-bottom: 4vh;
 }
 .jumbo h1 {
-  color: rgb(88, 0, 0);
+  color: rgb(117, 0, 0);
   font-size: calc(1.425rem + 2.1vw);
   font-weight: 300;
   line-height: 1.2;

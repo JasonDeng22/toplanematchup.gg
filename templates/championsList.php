@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <meta name="author" content="John Yun, Jason Deng" />
-    <meta name="description" content="Sprint 2 Website" />
+    <meta name="description" content="CS4640 Project Website" />
     <meta name="keywords" content="League of Legends, Top Lane, Matchups" />
 
     <title>TOPMATCHUPS.GG</title>
@@ -74,124 +74,16 @@
     <!--Champions-->
     <div class="container">
       <div class="row">
-        <!-- Aatrox -->
-        <div class="card col-md-4">
-          <img src="champArt/Aatrox.jpg" alt="A picture of Aatrox." />
 
-          <div class="card-body">
-            <a class="links stretched-link" href="champions/aatrox.html"
-              >Aatrox</a
-            >
-            <p class="card-text"></p>
-          </div>
-        </div>
-        <!-- Camille -->
-        <div class="card col-md-4">
-          <img src="champArt/Camille.jpg" alt="A picture of Camille." />
-          <div class="card-body">
-            <a class="links stretched-link" href="champions/camille.html"
-              >Camille</a
-            >
-            <p class="card-text"></p>
-          </div>
-        </div>
-        <!-- Darius -->
-        <div class="card col-md-4">
-          <img src="champArt/darius.jpg" alt="Darius splash art" />
-          <div class="card-body">
-            <a class="links stretched-link" href="champions/darius.html"
-              >Darius</a
-            >
-            <p class="card-text"></p>
-          </div>
-        </div>
-        <!-- Fiora -->
-        <div class="card col-md-4">
-          <img src="champArt/Fiora.jpg" alt="fiora splash art" />
-          <div class="card-body">
-            <a class="links stretched-link" href="champions/Fiora.html"
-              >Fiora</a
-            >
-            <p class="card-text"></p>
-          </div>
-        </div>
-        <!-- Gangplank -->
-        <div class="card col-md-4">
-          <img src="champArt/Gangplank.jpg" alt="fiora splash art" />
-          <div class="card-body">
-            <a class="links stretched-link" href="champions/Gangplank.html"
-              >Gangplank</a
-            >
-            <p class="card-text"></p>
-          </div>
-        </div>
-        <!-- Irelia -->
-        <div class="card col-md-4">
-          <img src="champArt/irelia.jpg" alt="Irelia splash art" />
-          <div class="card-body">
-            <a class="links stretched-link" href="champions/irelia.html"
-              >Irelia</a
-            >
-            <p class="card-text"></p>
-          </div>
-        </div>
-        <!-- Jax -->
-        <div class="card col-md-4">
-          <img src="champArt/jax.jpg" alt="Jax splash art" />
-          <div class="card-body">
-            <a class="links stretched-link" href="champions/jax.html">Jax</a>
-            <p class="card-text"></p>
-          </div>
-        </div>
-        <!-- Jayce -->
-        <div class="card col-md-4">
-          <img src="champArt/Jayce.jpg" alt="Jayce splash art" />
-          <div class="card-body">
-            <a class="links stretched-link" href="champions/Jayce.html"
-              >Jayce</a
-            >
-            <p class="card-text"></p>
-          </div>
-        </div>
-        <!-- Renekton -->
-        <div class="card col-md-4">
-          <img src="champArt/renekton.jpg" alt="Jayce splash art" />
-          <div class="card-body">
-            <a class="links stretched-link" href="champions/Renekton.html"
-              >Renekton</a
-            >
-            <p class="card-text"></p>
-          </div>
-        </div>
-        <!-- riven -->
-        <div class="card col-md-4">
-          <img src="champArt/riven.jpg" alt="Jayce splash art" />
-          <div class="card-body">
-            <a class="links stretched-link" href="champions/Riven.html"
-              >Riven</a
-            >
-            <p class="card-text"></p>
-          </div>
-        </div>
-
-        <!-- Sett -->
-        <div class="card col-md-4">
-          <img src="champArt/sett.jpg" alt="sett splash art" />
-          <div class="card-body">
-            <a class="links stretched-link" href="champions/Sett.html">Sett</a>
-            <p class="card-text"></p>
-          </div>
-        </div>
-        <!-- Tryndamere -->
-        <div class="card col-md-4">
-          <img src="champArt/tryndamere.jpg" alt="Tryndamere splash art" />
-          <div class="card-body">
-            <a class="links stretched-link" href="champions/Tryndamere.html"
-              >Tryndamere</a
-            >
-            <p class="card-text"></p>
-          </div>
-        </div>
+        <?php
+          foreach ($champions as $key=>$value){
+            echo '<div class="card col-md-4">';
+            echo '<img src="champArt/'.$value["splashDir"].'" alt="A picture of'.$value["name"].'." />';
+            echo '<div class="card-body">';
+            echo '<a class="links stretched-link" href="?command='.$value["name"].'">'.$value["name"].'</a>';
+            echo '<p class="card-text"></p></div></div>';
+          }
+        ?>
       </div>
     </div>
     <br><br><br>

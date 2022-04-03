@@ -148,6 +148,13 @@ class MatchupController {
 
     private function championsList() {
 
+        # query to get all the champions for display
+        $champions = $this->db->query("SELECT * FROM project_champions");
+
+        if ($champions === false){
+            $error_msg = "Error getting list of champions";
+        }
+
         include "templates/championsList.php";
     }
 
