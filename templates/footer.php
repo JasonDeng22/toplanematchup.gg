@@ -2,13 +2,13 @@
     <p class="col-md-4 mb-0 text-white">&copy; 2022 John Yun & Jason Deng</p>
     <ul class="nav col-md-8 justify-content-end">
       <li class="nav-item">
-        <a href="index.html" class="nav-link px-2 text-white">Home</a>
+        <a href="?command=home" class="nav-link px-2 text-white">Home</a>
       </li>
       <li class="nav-item">
         <a href="#" class="nav-link px-2 text-white">Matchup Of The Day</a>
       </li>
       <li class="nav-item">
-        <a href="champions.html" class="nav-link px-2 text-white">Champions</a>
+        <a href="?command=championsList" class="nav-link px-2 text-white">Champions</a>
       </li>
       <li class="nav-item">
         <a href="forum.html" class="nav-link px-2 text-white">Discussions Forum</a>

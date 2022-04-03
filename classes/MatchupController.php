@@ -4,7 +4,7 @@
 //               https://www.w3schools.com/php/php_form_validation.asp
 //               https://stackoverflow.com/questions/13392842/using-php-regex-to-validate-username
 //               https://www.php.net/manual/en/control-structures.goto.php  <- this is not good practice, but my code is structured terribly so whatever
-//
+//               https://stackoverflow.com/questions/20627245/redirect-to-the-same-page-after-log-out
 
 class MatchupController {
     private $command;
@@ -19,6 +19,9 @@ class MatchupController {
             case "logout":
                 $this->destroySession();
                 $this->home();
+                break;
+            case "championsList":
+                $this->championsList();
                 break;
             case "signup":
                 $this->signup();
@@ -142,11 +145,25 @@ class MatchupController {
         }
         include "templates/login.php";
     }    
+
+    private function championsList() {
+
+        include "templates/championsList.php";
+    }
+
+
+    // unset session variables then destroy (doesn't work otherwise...)
+    // redirect user to same page instead of default home page using $_SERVER and HTTP_REFERER
     private function destroySession() {   
         unset($_SESSION['email']);
         unset($_SESSION['name']);       
         session_destroy();
         session_start();
+        if(isset($_SERVER['HTTP_REFERER'])) {
+            header('Location: '.$_SERVER['HTTP_REFERER']);  
+        } else {
+            header('Location: index.php');  
+        }
     }
 }
 

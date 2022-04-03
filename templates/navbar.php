@@ -25,7 +25,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="champions.html"
+              <a class="nav-link" aria-current="page" href="?command=championsList"
                 >Champions</a
               >
             </li>
