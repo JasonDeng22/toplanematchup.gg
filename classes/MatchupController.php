@@ -23,6 +23,9 @@ class MatchupController {
             case "championsList":
                 $this->championsList();
                 break;
+            case "championInfo":
+                $this->championInfo();
+                break;
             case "signup":
                 $this->signup();
                 break;
@@ -150,15 +153,27 @@ class MatchupController {
 
         # query to get all the champions for display
         $champions = $this->db->query("SELECT * FROM project_champions");
-
+        if (isset($_SESSION["email"]) && isset($_SESSION["name"])){
+            $user = [
+                "name" => $_SESSION["name"],
+                "email" => $_SESSION["email"],
+            ];
+        }
         if ($champions === false){
             $error_msg = "Error getting list of champions";
         }
 
+        if (isset($_POST["champSelected"])){
+            $user["champSelected"] = $_POST["champSelected"];
+            header("Location: ?command=champions");
+        }
         include "templates/championsList.php";
     }
 
-
+    private function championInfo(){
+        print_r($_SESSION);
+        include "templates/championInfo.php";
+    }
     // unset session variables then destroy (doesn't work otherwise...)
     // redirect user to same page instead of default home page using $_SERVER and HTTP_REFERER
     private function destroySession() {   
@@ -181,6 +196,19 @@ of checking if a current session has been started, check if the session variable
 can check if a user is logged in. However, I don't think it's a good idea to start sessions for every user even if they
 are logged in, since I only want to track sessions for logged in users in order to track their comments.
 
-Note to self: check TA OH or Prof Hott OH whenever you can about this issue
 
+Check with Professor at OH:
+
+1) Session handling (see above)
+2) Web scraping allowed?
+3) Updating win rate and pick rate, database insert issue
+4) How to display champion page given one command: ?command=champion. See below for more information
+5) JavaScript vs. PHP: I want to be able to add sorting in championsList and also have options to change the
+   view of the list of champions (grid vs table). I'm assuming PHP and JavaScript can do both, which one should
+   I do / focus on? Which one is better?
+
+
+
+For 4), I want to be able to have a single php file called champions.php where I load in the champion
+information from the database with SELECT and then display that information in the champion page. 
 */
