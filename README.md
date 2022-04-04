@@ -1,3 +1,3 @@
 # toplanematchup.gg
 
-Tech stack: HTML, CSS, LESS, Bootstrap, PHP, JavaScript, MySQL, Angular, Apache, XAMPP, Git, GitHub, Google Cloud Platform
+Tech stack: HTML, CSS, LESS, Bootstrap, PHP, JavaScript, MySQL, Apache, XAMPP, Git, GitHub
