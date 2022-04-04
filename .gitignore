@@ -2,6 +2,7 @@ hmtl_validation_ANDI/
 backgrounds/
 classes/Config.php
 .Config.php
-.setup
-.setup.php
-
+composer.json
+composer.lock
+vendor/
+guzzle_requests.php

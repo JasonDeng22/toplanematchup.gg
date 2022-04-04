@@ -63,6 +63,7 @@ Sources used: https://bbbootstrap.com/snippets/bootstrap-5-search-bar-microphone
                   type="text"
                   class="form-control form-input"
                   placeholder="Search any champion"
+                  name="champSearch"
                 />
                 <span class="left-pan"><i class="fa fa-microphone"></i></span>
               </div>
