@@ -60,27 +60,36 @@
               <h3><?=$champName?> is strong against these champions</h3>
             </div>
             <div class="card-body">
-              <div class="matchup-card" style="transform: rotate(0)">
-                <img src="../champArt/jayceicon.png" alt="Jayce icon" />
-                <a href="aatrox-vs-jayce.html" class="name stretched-link"
-                  >Jayce</a
-                >
-                <p class="winRate">Win Rate: 52.33%</p>
-              </div>
-              <div class="matchup-card" style="transform: rotate(0)">
-                <img src="../champArt/renektonIcon.png" alt="Renekton icon" />
-                <a href="aatrox-vs-jayce.html" class="name stretched-link"
-                  >Renekton</a
-                >
-                <p class="winRate">Win Rate: 54.09%</p>
-              </div>
-              <div class="matchup-card" style="transform: rotate(0)">
-                <img src="../champArt/SettIcon.png" alt="Sett icon" />
-                <a href="aatrox-vs-jayce.html" class="name stretched-link"
-                  >Sett</a
-                >
-                <p class="winRate">Win Rate: 51.74%</p>
-              </div>
+            <!-- Print out the 6 best matchups in terms of winrate -->
+            <!-- TODO: Implement sorting matchups by win rate / gold diff / kill diff -->
+            <?php
+                foreach ($bestMatchups as $key=>$value){
+                    echo '<div class="matchup-card" style="transform: rotate(0)">';
+                    echo '<img src="./champArt/'.$value["champ2"].'Icon.png" alt="'.$value["champ2"].' icon" />';
+                    echo '<a href="?command=matchupPage&champ1='.$value["champ1"].'&champ2='.$value["champ2"].'" class="name stretched-link">'.$value["champ2"].'<br><br></a>';
+                    if ($value["winRate"] >= 51){
+                        $color = "color: rgb(29, 172, 0)";
+                    }
+                    else if ($value["winRate"] <= 49){
+                        $color = "color: rgb(163,0 , 0)";
+                    }
+                    else{
+                        $color =  "color: rgb(250,250 ,250)";
+                    }
+                    echo '<p class="winRate">Win Rate:&nbsp<b style="'.$color.'">'.$value["winRate"].'%</b></p>';
+                    if ($value["goldDiff"] > 150){
+                        $color = "color: rgb(29, 172, 0)";
+                    }
+                    else if ($value["goldDiff"] < -150){
+                        $color = "color: rgb(163,0 , 0)";
+                    }
+                    else{
+                        $color =  "color: rgb(250,250 ,250)";
+                    }
+                    echo '<p class="goldDiff">Gold Diff @ 15:<b style="'.$color.'"> '.$value["goldDiff"].'</b></p><br>';
+                    echo '</div>';
+                }
+            ?>
             </div>
           </div>
 
@@ -91,27 +100,36 @@
               <h3><?=$champName?> is weak against these champions</h3>
             </div>
             <div class="card-body">
-              <div class="matchup-card" style="transform: rotate(0)">
-                <img src="../champArt/rivenicon.png" alt="Riven icon" />
-                <a href="aatrox-vs-jayce.html" class="name stretched-link"
-                  >Riven</a
-                >
-                <p class="winRate">Win Rate: 45.73%</p>
-              </div>
-              <div class="matchup-card" style="transform: rotate(0)">
-                <img src="../champArt/jaxicon.png" alt="Jax icon" />
-                <a href="aatrox-vs-jayce.html" class="name stretched-link"
-                  >Jax</a
-                >
-                <p class="winRate">Win Rate: 47.88%</p>
-              </div>
-              <div class="matchup-card" style="transform: rotate(0)">
-                <img src="../champArt/fioraicon.png" alt="Fiora icon" />
-                <a href="aatrox-vs-jayce.html" class="name stretched-link"
-                  >Fiora</a
-                >
-                <p class="winRate">Win Rate: 48.48%</p>
-              </div>
+            <!-- Print out the 6 worst matchups in terms of winrate -->
+            <!-- TODO: Implement sorting matchups by win rate / gold diff / kill diff -->
+            <?php
+                foreach ($worstMatchups as $key=>$value){
+                    echo '<div class="matchup-card" style="transform: rotate(0)">';
+                    echo '<img src="./champArt/'.$value["champ2"].'Icon.png" alt="'.$value["champ2"].' icon" />';
+                    echo '<a href="?command=matchupPage&champ1='.$value["champ1"].'&champ2='.$value["champ2"].'" class="name stretched-link">'.$value["champ2"].'<br><br></a>';
+                    if ($value["winRate"] >= 51){
+                        $color = "color: rgb(29, 172, 0)";
+                    }
+                    else if ($value["winRate"] <= 49){
+                        $color = "color: rgb(163,0 , 0)";
+                    }
+                    else{
+                        $color =  "color: rgb(250,250 ,250)";
+                    }
+                    echo '<p class="winRate">Win Rate:&nbsp<b style="'.$color.'">'.$value["winRate"].'%</b></p>';
+                    if ($value["goldDiff"] > 150){
+                        $color = "color: rgb(29, 172, 0)";
+                    }
+                    else if ($value["goldDiff"] < -150){
+                        $color = "color: rgb(163,0 , 0)";
+                    }
+                    else{
+                        $color =  "color: rgb(250,250 ,250)";
+                    }
+                    echo '<p class="goldDiff">Gold Diff @ 15:<b style="'.$color.'"> '.$value["goldDiff"].'</b></p><br>';
+                    echo '</div>';
+                }
+            ?>
             </div>
           </div>
         </div>

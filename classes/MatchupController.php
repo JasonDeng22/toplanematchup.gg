@@ -29,6 +29,9 @@ class MatchupController {
             case "championInfo":
                 $this->championInfo();
                 break;
+            case "matchupPage":
+                $this->matchupPage();
+                break;
             case "signup":
                 $this->signup();
                 break;
@@ -208,11 +211,23 @@ class MatchupController {
             header("Location:?command=pageNotFound");
         }
 
+        # query to get the 6 best matchups and 6 worst matchups given a champ1
+
+        $bestMatchups = $this->db->query("SELECT * FROM project_matchups WHERE champ1 = ? ORDER BY winRate DESC LIMIT 8;","s",$champName);
+        $worstMatchups = $this->db->query("SELECT * FROM project_matchups WHERE champ1 = ? ORDER BY winRate ASC LIMIT 8;","s",$champName);
+
         $description = $champion[0]["description"];
         $moniker = $champion[0]["moniker"];
         $wr = $champion[0]["winRate"];
         $pr = $champion[0]["pickRate"];
         include "templates/championInfo.php";
+    }
+
+    // TODO: display the comment system for matchup between two champs along with tips / stats / etc.
+    private function matchupPage(){
+        $champ1 = $_GET["champ1"];
+        $champ2 = $_GET["champ2"];
+        include "templates/matchupPage.php";
     }
 
     private function pageNotFound(){
@@ -225,6 +240,7 @@ class MatchupController {
         // }
         include "templates/pageNotFound.php";
     }
+
     // unset session variables then destroy (doesn't work otherwise...)
     // redirect user to same page instead of default home page using $_SERVER and HTTP_REFERER
     private function destroySession() {   

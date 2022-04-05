@@ -274,6 +274,7 @@ function get_and_insert_Counters(){
 
 # comment these functions out depending on what you need to do
 
+# these are user defined functions?
 #createNewUserTable();
 
 createNewChampionsTable();
