@@ -4,13 +4,13 @@ body {
 
 .jumbo {
   margin-top: 4vh;
-  background: rgba(10, 10, 10, 0.6) url("../champArt/Aatrox.jpg");
+  /*background: rgba(10, 10, 10, 0.6) url("../champArt/Aatrox.jpg");*/
   background-size: cover;
   background-blend-mode: darken;
   margin-bottom: 4vh;
 }
 .jumbo h1 {
-  color: rgb(117, 0, 0);
+  color: rgb(219, 219, 219);
   font-size: calc(1.425rem + 2.1vw);
   font-weight: 300;
   line-height: 1.2;
@@ -21,12 +21,12 @@ body {
   font-size: 1.5rem;
 }
 @media (max-width: 767.98px) {
-  .jumbo {
+  /*.jumbo {
     background-image: url("../champArt/Aatrox.jpg");
     background-size: cover;
-  }
+  }*/
   .jumbo h1 {
-    color: rgb(88, 0, 0);
+    color: rgb(219, 219, 219);
     font-size: calc(1.425rem + 2.1vw);
   }
   .jumbo p {

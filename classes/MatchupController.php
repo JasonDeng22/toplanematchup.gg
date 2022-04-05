@@ -5,7 +5,7 @@
 //               https://stackoverflow.com/questions/13392842/using-php-regex-to-validate-username
 //               https://www.php.net/manual/en/control-structures.goto.php  <- this is not good practice, but my code is structured terribly so whatever
 //               https://stackoverflow.com/questions/20627245/redirect-to-the-same-page-after-log-out
-
+//               https://stackoverflow.com/questions/8130990/how-to-redirect-to-the-same-page-in-php
 class MatchupController {
     private $command;
     private $db;
@@ -19,6 +19,9 @@ class MatchupController {
             case "logout":
                 $this->destroySession();
                 $this->home();
+                break;
+            case "pageNotFound":
+                $this->pageNotFound();
                 break;
             case "championsList":
                 $this->championsList();
@@ -40,7 +43,7 @@ class MatchupController {
     }
 
     private function home(){
-
+        $_SESSION['url'] = $_SERVER['REQUEST_URI'];
         if (isset($_SESSION["email"]) && isset($_SESSION["name"])){
             $user = [
                 "name" => $_SESSION["name"],
@@ -103,14 +106,21 @@ class MatchupController {
             // Every input should be good, so now add this user into the database start their session
             $insert = $this->db->query("insert into project_user (name, email, password) values (?, ?, ?);", 
             "sss", $name,$email, password_hash($_POST["password"], PASSWORD_DEFAULT));
-            # session_start();
-            $_SESSION['name'] = $_POST['name'];   
-            $_SESSION['email'] = $_POST['email'];
-            header("Location: ?command=home");
 
             if ($insert === false) {
                 $error_msg = "Error inserting user";
             }
+
+            # session_start();
+            $_SESSION['name'] = $_POST['name'];   
+            $_SESSION['email'] = $_POST['email'];
+            if (isset($_SESSION["url"])){
+                $url = $_SESSION['url'];
+            }
+            else{
+                $url = "index.php";
+            }
+            header("Location:".$url);
         }
         end:
         include "templates/signup.php";
@@ -135,7 +145,13 @@ class MatchupController {
                         #session_start();
                         $_SESSION['name'] = $data[0]["name"];  
                         $_SESSION['email'] = $_POST['email'];
-                        header("Location: ?command=home");
+                        if (isset($_SESSION["url"])){
+                            $url = $_SESSION['url'];
+                        }
+                        else{
+                            $url = "index.php";
+                        }
+                        header("Location:".$url);
                     } else {
                         $error_msg = "Wrong credentials";
                     }
@@ -150,7 +166,7 @@ class MatchupController {
     }    
 
     private function championsList() {
-
+        $_SESSION['url'] = $_SERVER['REQUEST_URI'];
         # query to get all the champions for display
         $champions = $this->db->query("SELECT * FROM project_champions");
         if (isset($_SESSION["email"]) && isset($_SESSION["name"])){
@@ -171,8 +187,43 @@ class MatchupController {
     }
 
     private function championInfo(){
-        print_r($_SESSION);
+        $_SESSION['url'] = $_SERVER['REQUEST_URI'];
+        # prepare all HTML elements given a specific champ name
+        if (isset($_SESSION["email"]) && isset($_SESSION["name"])){
+            $user = [
+                "name" => $_SESSION["name"],
+                "email" => $_SESSION["email"],
+            ];}
+        
+        $champName = $_GET["champName"];
+
+        # query to get all the champions for display
+        $champion = $this->db->query("SELECT * FROM project_champions WHERE name=?","s",$champName);
+        if ($champion === false){
+            $error_msg = "Error getting champion";
+        }
+
+        # if this champion wasn't found, send it to 404
+        if (empty($champion)){
+            header("Location:?command=pageNotFound");
+        }
+
+        $description = $champion[0]["description"];
+        $moniker = $champion[0]["moniker"];
+        $wr = $champion[0]["winRate"];
+        $pr = $champion[0]["pickRate"];
         include "templates/championInfo.php";
+    }
+
+    private function pageNotFound(){
+        // $x = $this->db->query("SELECT moniker FROM project_champions");
+        // echo "<pre>";
+        // print_r($x);
+        // echo "</pre>";
+        // foreach ($x as $value){
+        //     echo $value["moniker"]. " <br>";
+        // }
+        include "templates/pageNotFound.php";
     }
     // unset session variables then destroy (doesn't work otherwise...)
     // redirect user to same page instead of default home page using $_SERVER and HTTP_REFERER

@@ -78,10 +78,9 @@
         <?php
           foreach ($champions as $key=>$value){
             echo '<div class="card col-md-4">';
-            echo '<img src="champArt/'.$value["splashDir"].'" alt="A picture of'.$value["name"].'." />';
+            echo '<img src="champArt/'.$value["name"].'.jpg" alt="A picture of'.$value["name"].'." />';
             echo '<div class="card-body">';
-            echo '<a class="links stretched-link" href="?command=championInfo">'.$value["name"].'</a>';
-            #echo ' <input method="post" type="hidden" id="champSelected" name="champSelected" value='.$value["name"].'>';
+            echo '<a class="links stretched-link" href="?command=championInfo&champName='.$value["name"].'">'.$value["name"].'</a>';
             echo '<p class="card-text"></p></div></div>';
           }
         ?>
