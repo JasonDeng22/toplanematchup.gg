@@ -71,7 +71,7 @@ Sources used: https://bbbootstrap.com/snippets/bootstrap-5-search-bar-microphone
                   <input type="hidden" name="date_to_dislike" value="<?php echo $c['createdOn'] ?>" />
                 </form>
                 <?php echo $c["dislikes"] ?>
-                <?php if (!empty($_SESSION)) {
+                <?php if (isset($_SESSION["email"])) {
                   if ($c['userid'] == $_SESSION["id"][0]["id"]) { ?>
                     <form style="display: inline-block; float: right" action="?command=deleteComment" method="post">
                       <input type="submit" value="x" name="btnAction" class="btn btn-danger" />

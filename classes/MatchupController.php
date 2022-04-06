@@ -270,6 +270,7 @@ class MatchupController {
 
     private function forum()
     {
+        $_SESSION['url'] = $_SERVER['REQUEST_URI'];
         $allComments = $this->getAllComments();
         if (isset($_POST["comment"]) && !empty($_POST["comment"]) && !isset($_SESSION["email"]) && !isset($_SESSION["name"])) {
             header("Location: ?command=login");
