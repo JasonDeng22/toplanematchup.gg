@@ -39,7 +39,27 @@ function createNewChampionsTable(){
                     pickRate DECIMAL(4,2)
                 );");
 }
+function createForumTableAndComments(){
+    $db->query("CREATE TABLE project_comments (
+        id INT NOT NULL AUTO_INCREMENT,
+        userID INT NOT NULL,
+        comment LONGTEXT NOT NULL,
+        createdOn DATETIME NOT NULL,
+        likes INT DEFAULT 0,
+        dislikes INT DEFAULT 0,
+        PRIMARY KEY ('id')
+    );");
 
+    $db->query("CREATE TABLE project_comments (
+        id INT NOT NULL AUTO_INCREMENT,
+        userID INT NOT NULL,
+        comment LONGTEXT NOT NULL,
+        createdOn DATETIME NOT NULL,
+        likes INT DEFAULT 0,
+        dislikes INT DEFAULT 0,
+        PRIMARY KEY ('id')
+    );");
+}
 
 # insert all the champions into the project_champions database
 function insertChampions(){
@@ -284,5 +304,7 @@ insertChampions();
 get_and_insert_Name_WR_PR();
 
 get_and_insert_Counters();
+
+createForumTableAndComments();
 
 echo "Setup was successful";

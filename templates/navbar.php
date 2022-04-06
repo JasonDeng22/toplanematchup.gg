@@ -43,7 +43,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="?command=profile">View your Profile</a>
-                <a class="dropdown-item" href="#">Discussion Forum</a>
+                <a class="dropdown-item" href="?command=forum">Discussion Forum</a>
                 <a class="dropdown-item" href="#">FAQ</a>
                 <a class="dropdown-item" href="#">About Us</a>
                 <a class="dropdown-item" href="#">Contact Us</a>

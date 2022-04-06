@@ -32,6 +32,19 @@ class MatchupController {
             case "matchupPage":
                 $this->matchupPage();
                 break;
+                //
+            case "forum":
+                $this->forum();
+                break;
+            case "deleteComment":
+                $this->deleteComment();
+                break;
+            case "likeComment":
+                $this->likeComment();
+                break;
+            case "dislikeComment":
+                $this->dislikeComment();
+                break;
             case "signup":
                 $this->signup();
                 break;
@@ -254,28 +267,163 @@ class MatchupController {
             header('Location: index.php');  
         }
     }
+
+    private function forum()
+    {
+        $allComments = $this->getAllComments();
+        if (isset($_POST["comment"]) && !empty($_POST["comment"]) && !isset($_SESSION["email"]) && !isset($_SESSION["name"])) {
+            header("Location: ?command=login");
+        }
+        $numComm = $this->getNumComments();
+        if (isset($_SESSION["email"]) && isset($_SESSION["name"])) {
+            $user = [
+                "name" => $_SESSION["name"],
+                "email" => $_SESSION["email"],
+            ];
+            $id = $this->db->query("select id from project_user where name=? and email=?;", "ss", $user["name"], $user["email"]);
+            $_SESSION["id"] = $id;
+        }
+
+        if (isset($_POST["comment"]) && !empty($_POST["comment"]) && isset($_SESSION["email"]) && isset($_SESSION["name"])) {
+            $comment = $_POST["comment"];
+            $id = $this->db->query("select id from project_user where name=? and email=?;", "ss", $_SESSION["name"], $_SESSION["email"]);
+            $_SESSION["id"] = $id;
+            $insert = $this->db->query("insert into project_comments (userID, comment, createdOn) values (?, ?, NOW());", "is", $id[0]["id"], $comment);
+
+            $numComm = $this->getNumComments();
+            $allComments = $this->getAllComments();
+
+            if (!isset($insert)) {
+                echo "There was an issue with inserting the comment";
+            }
+        }
+
+        include "templates/forum.php";
+    }
+
+    private function getNumComments()
+    {
+        $numComm = $this->db->query("select COUNT(id) from project_comments");
+
+        return $numComm;
+    }
+
+    private function getAllComments()
+    {
+        $allComments = $this->db->query("SELECT userid, name, comment, createdOn, likes, dislikes FROM project_user INNER JOIN project_comments on project_comments.userID=project_user.id ORDER BY createdOn DESC LIMIT 10;");
+        //SELECT * FROM project_user INNER JOIN project_comments on project_comments.userID=project_user.id ORDER BY createdOn DESC;
+
+        if (!isset($allComments[0])) {
+            $allComments = [];
+        }
+
+        return $allComments;
+
+        include("templates/forum.php");
+    }
+
+    private function deleteComment()
+    {
+        $comment_to_delete = $_POST["comment_to_delete"];
+        $date_to_delete = $_POST["date_to_delete"];
+        $data = $this->db->query("SELECT * from project_comments where comment=? and createdOn=?;", "ss", $comment_to_delete, $date_to_delete);
+        echo $_SESSION["id"][0]["id"];
+        echo $data[0]["userID"];
+
+        if ($_SESSION["id"][0]["id"] !== $data[0]["userID"]) {
+            header("Location: ?command=forum");
+        } else if ($_SESSION["id"][0]["id"] == $data[0]["userID"]) {
+            $query = $this->db->query("DELETE FROM  project_comments WHERE comment=? AND createdOn=?", "ss", $comment_to_delete, $date_to_delete);
+            header("Location: ?command=forum");
+        }
+
+        include("templates/forum.php");
+    }
+
+    private function likeComment()
+    {
+        if (empty($_SESSION)) {
+            header("Location: ?command=login");
+        }
+        $comment_to_like = $_POST["comment_to_like"];
+        $date_to_like = $_POST["date_to_like"];
+        $userid = $_SESSION["id"][0]["id"];
+        $query = $this->db->query("SELECT id FROM project_comments WHERE comment=? AND createdOn=?;", "ss", $comment_to_like, $date_to_like);
+        $commentid = $query[0]["id"];
+
+        $check = $this->db->query("SELECT like_comment, dislike_comment FROM project_likes_dislikes WHERE userid=? AND commentid=?", "ii", $userid, $commentid);
+        if (empty($check)) {
+            $likes = $this->db->query("SELECT likes FROM project_comments WHERE id=?;", "i", $commentid);
+            $current_likes = $likes[0]["likes"];
+            $insert = $this->db->query("INSERT INTO project_likes_dislikes (userid, commentid, like_comment, dislike_comment) VALUES (?, ?, ?, ?);", "iiii", $userid, $commentid, 1, 0);
+            $updated_likes = $current_likes + 1;
+            $update = $this->db->query("UPDATE project_comments SET likes=? WHERE id=?;", "ii", $updated_likes, $commentid);
+            header("Location: ?command=forum");
+        } else if ($check[0]["like_comment"] == 1 && $check[0]["dislike_comment"] == 0) {
+            $likes = $this->db->query("SELECT likes FROM project_comments WHERE id=?;", "i", $commentid);
+            $current_likes = $likes[0]["likes"];
+            $remove = $this->db->query("DELETE FROM project_likes_dislikes WHERE userid=? and commentid=?;", "ii", $userid, $commentid);
+            $updated_likes = $current_likes - 1;
+            $update = $this->db->query("UPDATE project_comments SET likes=? WHERE id=?;", "ii", $updated_likes, $commentid);
+            header("Location: ?command=forum");
+        } else if ($check[0]["like_comment"] == 0 && $check[0]["dislike_comment"] == 1) {
+            $dislikes = $this->db->query("SELECT dislikes FROM project_comments WHERE id=?;", "i", $commentid);
+            $current_dislikes = $dislikes[0]["dislikes"];
+            $remove = $this->db->query("DELETE FROM project_likes_dislikes WHERE userid=? and commentid=?;", "ii", $userid, $commentid);
+            $updated_dislikes = $current_dislikes + 1;
+            $update = $this->db->query("UPDATE project_comments SET dislikes=? WHERE id=?;", "ii", $updated_dislikes, $commentid);
+            $likes = $this->db->query("SELECT likes FROM project_comments WHERE id=?;", "i", $commentid);
+            $current_likes = $likes[0]["likes"];
+            $insert = $this->db->query("INSERT INTO project_likes_dislikes (userid, commentid, like_comment, dislike_comment) VALUES (?, ?, ?, ?);", "iiii", $userid, $commentid, 1, 0);
+            $updated_likes = $current_likes + 1;
+            $update = $this->db->query("UPDATE project_comments SET likes=? WHERE id=?;", "ii", $updated_likes, $commentid);
+            header("Location: ?command=forum");
+        } else {
+            exit("SOMETHING WENT WRONG WITH LIKE");
+        }
+    }
+
+    private function dislikeComment()
+    {
+        if (empty($_SESSION)) {
+            header("Location: ?command=login");
+        }
+        $comment_to_dislike = $_POST["comment_to_dislike"];
+        $date_to_dislike = $_POST["date_to_dislike"];
+        $userid = $_SESSION["id"][0]["id"];
+        $query = $this->db->query("SELECT id FROM project_comments WHERE comment=? AND createdOn=?;", "ss", $comment_to_dislike, $date_to_dislike);
+        $commentid = $query[0]["id"];
+
+        $check = $this->db->query("SELECT like_comment, dislike_comment FROM project_likes_dislikes WHERE userid=? AND commentid=?", "ii", $userid, $commentid);
+        if (empty($check)) {
+            $dislikes = $this->db->query("SELECT dislikes FROM project_comments WHERE id=?;", "i", $commentid);
+            $current_dislikes= $dislikes[0]["dislikes"];
+            $insert = $this->db->query("INSERT INTO project_likes_dislikes (userid, commentid, like_comment, dislike_comment) VALUES (?, ?, ?, ?);", "iiii", $userid, $commentid, 0, 1);
+            $updated_dislikes = $current_dislikes - 1;
+            $update = $this->db->query("UPDATE project_comments SET dislikes=? WHERE id=?;", "ii", $updated_dislikes, $commentid);
+            header("Location: ?command=forum");
+        } else if  ($check[0]["like_comment"] == 0 && $check[0]["dislike_comment"] == 1) {
+            $dislikes = $this->db->query("SELECT dislikes FROM project_comments WHERE id=?;", "i", $commentid);
+            $current_dislikes = $dislikes[0]["dislikes"];
+            $remove = $this->db->query("DELETE FROM project_likes_dislikes WHERE userid=? and commentid=?;", "ii", $userid, $commentid);
+            $updated_dislikes = $current_dislikes + 1;
+            $update = $this->db->query("UPDATE project_comments SET dislikes=? WHERE id=?;", "ii", $updated_dislikes, $commentid);
+            header("Location: ?command=forum");
+        } else if ($check[0]["like_comment"] == 1 && $check[0]["dislike_comment"] == 0) {
+            $likes = $this->db->query("SELECT likes FROM project_comments WHERE id=?;", "i", $commentid);
+            $current_likes = $likes[0]["likes"];
+            $remove = $this->db->query("DELETE FROM project_likes_dislikes WHERE userid=? and commentid=?;", "ii", $userid, $commentid);
+            $updated_likes = $current_likes - 1;
+            $update = $this->db->query("UPDATE project_comments SET likes=? WHERE id=?;", "ii", $updated_likes, $commentid);
+            $dislikes = $this->db->query("SELECT dislikes FROM project_comments WHERE id=?;", "i", $commentid);
+            $current_dislikes= $dislikes[0]["dislikes"];
+            $insert = $this->db->query("INSERT INTO project_likes_dislikes (userid, commentid, like_comment, dislike_comment) VALUES (?, ?, ?, ?);", "iiii", $userid, $commentid, 0, 1);
+            $updated_dislikes = $current_dislikes - 1;
+            $update = $this->db->query("UPDATE project_comments SET dislikes=? WHERE id=?;", "ii", $updated_dislikes, $commentid);
+            header("Location: ?command=forum");
+        } else {
+            print_r($check);
+            exit("SOMETHING WENT WRONG WITH DISLIKE");
+        }
+    }
 }
-
-/* I am trying to make it so that when a user successfully logs in, start a session and assign the appropriate
-session values. However, it doesn't seem to persist if I only call it in the login function(). I will resort to
-calling session_start() every time index.php is started, and then only assign session variables in login. Thus, instead
-of checking if a current session has been started, check if the session variable "email" has been set. This way, we
-can check if a user is logged in. However, I don't think it's a good idea to start sessions for every user even if they
-are logged in, since I only want to track sessions for logged in users in order to track their comments.
-
-
-Check with Professor at OH:
-
-1) Session handling (see above)
-2) Web scraping allowed?
-3) Updating win rate and pick rate, database insert issue
-4) How to display champion page given one command: ?command=champion. See below for more information
-5) JavaScript vs. PHP: I want to be able to add sorting in championsList and also have options to change the
-   view of the list of champions (grid vs table). I'm assuming PHP and JavaScript can do both, which one should
-   I do / focus on? Which one is better?
-
-
-
-For 4), I want to be able to have a single php file called champions.php where I load in the champion
-information from the database with SELECT and then display that information in the champion page. 
-*/
