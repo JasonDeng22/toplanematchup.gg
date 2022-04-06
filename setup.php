@@ -40,24 +40,24 @@ function createNewChampionsTable(){
                 );");
 }
 function createForumTableAndComments(){
+    $db = new Database();
+    $db->query("DROP TABLE IF EXISTS project_comments;");
     $db->query("CREATE TABLE project_comments (
-        id INT NOT NULL AUTO_INCREMENT,
+        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         userID INT NOT NULL,
         comment LONGTEXT NOT NULL,
         createdOn DATETIME NOT NULL,
         likes INT DEFAULT 0,
-        dislikes INT DEFAULT 0,
-        PRIMARY KEY ('id')
+        dislikes INT DEFAULT 0
     );");
 
-    $db->query("CREATE TABLE project_comments (
-        id INT NOT NULL AUTO_INCREMENT,
-        userID INT NOT NULL,
-        comment LONGTEXT NOT NULL,
-        createdOn DATETIME NOT NULL,
-        likes INT DEFAULT 0,
-        dislikes INT DEFAULT 0,
-        PRIMARY KEY ('id')
+    $db->query("DROP TABLE IF EXISTS project_likes_dislikes;");
+    $db->query("CREATE TABLE project_likes_dislikes(
+        like_dislike_id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        userid INT(11) NOT NULL,
+        commentid INT(11) NOT NULL,
+        like_comment BOOLEAN NOT NULL DEFAULT FALSE,
+        dislike_comment BOOLEAN NOT NULL DEFAULT FALSE
     );");
 }
 
