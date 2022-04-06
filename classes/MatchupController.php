@@ -313,7 +313,8 @@ class MatchupController {
     {
         $allComments = $this->db->query("SELECT userid, name, comment, createdOn, likes, dislikes FROM project_user INNER JOIN project_comments on project_comments.userID=project_user.id ORDER BY createdOn DESC LIMIT 10;");
         //SELECT * FROM project_user INNER JOIN project_comments on project_comments.userID=project_user.id ORDER BY createdOn DESC;
-
+        $allCommentsJSON = $this->db->query("SELECT json_object('userID', userID, 'comment', comment, 'createdOn', createdOn)
+                                             FROM project_comments;");
         if (!isset($allComments[0])) {
             $allComments = [];
         }
