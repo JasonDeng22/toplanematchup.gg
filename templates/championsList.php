@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<!-- https://codeburst.io/how-to-position-html-elements-side-by-side-with-css-e1fae72ddcc -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
