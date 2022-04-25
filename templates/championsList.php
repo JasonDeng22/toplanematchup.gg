@@ -89,8 +89,8 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
           <li><a class="dropdown-item" onclick="alphabeticalSort();">Alphabetical (Default)</a></li>
-          <li><a class="dropdown-item" onclick="winRateSort();">Highest Winrate</a></li>
-          <li><a class="dropdown-item" onclick="pickRateSort(true);">Highest Pickrate</a></li>
+          <li><a class="dropdown-item" onclick="winRateSort();">Winrate</a></li>
+          <li><a class="dropdown-item" onclick="pickRateSort(true);">Pickrate</a></li>
         </ul>
       </div>
     </div>
