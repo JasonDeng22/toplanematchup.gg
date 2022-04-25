@@ -14,6 +14,8 @@
         <title>User Signup</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> 
         <link rel="stylesheet" type="text/css" href="./styles/login_signup.css" />
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="./scripts/credentialValidate.js"></script>
     </head>
     <body class="main-bg">
         <?php 
@@ -31,23 +33,23 @@
                     <h3 class="text-whitesmoke">Register an account</h3>
                     <p class="text-whitesmoke">Fill out every field.</p>
                 <div class="container-content">
-                    <form action="?command=signup" method ="POST" class="margin-t">
+                    <form action="?command=signup" method ="POST" onsubmit="validate();" class="margin-t">
                         <div class="form-group">
                             <input type="email" class="form-control" id="email" placeholder="Email Address" name="email" >
-                            <div class="invalid-feedback">A valid email is required!</div>
+                            <div id="emhelp" style="color: white" class="form-text"></div>
                         </div>
                         <br>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="username" placeholder="Username" name="name" >
-                            <div class="invalid-feedback">A valid username is required!</div>
+                            <input type="text" class="form-control" id="name" placeholder="Username" name="name" >
+                            <div id="nmhelp" style="color: white" class="form-text"></div>
                         </div>
                         <br>
                         <div class="form-group">
-                            <input type="password" name="password" id="email" class="form-control" placeholder="Password" >
-                            <div class="invalid-feedback">Please fill out your password!</div>
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Password" >
+                            <div id="pwhelp" style="color: white" class="form-text"></div>
                         </div>
                         <br>
-                        <button type="submit" class="form-button button-l margin-b">Sign Up</button>
+                        <button id="submit" type="submit" class="form-button button-l margin-b">Sign Up</button>
                     </form>
                     <p class="text-whitesmoke text-center"><small>Already have an account?</small></p>
                     <a class="text-darkyellow" href="?command=login"><small>Sign In</small></a>

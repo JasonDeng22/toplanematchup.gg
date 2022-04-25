@@ -102,8 +102,8 @@
             echo '<div class="card-body">';
             echo '<a class="links stretched-link" href="?command=championInfo&champName='.$value["name"].'"></a>';
             echo '<p id="name" class="cardtext">'.$value["name"].'</p>
-                  <p id="winRate" class="cardtext">Win Rate: '.$value["winRate"].'</p>
-                  <p id="pickRate" class="cardtext">Pick Rate: '.$value["pickRate"].'</p>
+                  <p id="winRate" class="cardtext">Win Rate: '.$value["winRate"].'%</p>
+                  <p id="pickRate" class="cardtext">Pick Rate: '.$value["pickRate"].'%</p>
                   </div></div>';
           }
         ?>

@@ -15,6 +15,8 @@
         <title>User Login</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> 
         <link rel="stylesheet" type="text/css" href="./styles/login_signup.css" />
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="./scripts/credentialValidate.js"></script>
     </head>
     <body class="main-bg">
         <?php
@@ -32,18 +34,18 @@
                 <h3 class="text-whitesmoke">Sign In</h3>
                 <p class="text-whitesmoke">Fill out every field.</p>
             <div class="container-content">
-                <form  action="?command=login" method ="POST" class="margin-t">
+                <form action="?command=login" method="POST" onsubmit="validate();" class="margin-t">
                     <div class="form-group">
-                        <input type="email" class="form-control" id="email" placeholder="Email Address" name="email" required>
-                        <div class="invalid-feedback">A valid email is required!</div>
+                        <input type="email" class="form-control" id="email" placeholder="Email Address" name="email" >
+                        <div id="emhelp" style="color: white" class="form-text"></div>
                     </div>
                     <br>
                     <div class="form-group">
-                        <input type="password" name="password" id="email" class="form-control" placeholder="Password" required>
-                        <div class="invalid-feedback">Please fill out your password!</div>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                        <div id="pwhelp" style="color: white" class="form-text"></div>
                     </div>
                     <br>
-                    <button type="submit" class="form-button button-l margin-b">Sign In</button>
+                    <button id="submit" type="submit" class="form-button button-l margin-b">Sign In</button>
     
             
                 </form>
@@ -57,11 +59,11 @@
         <?php 
             #include "footer.php";
         ?>
-        <script
+        <!-- <script
         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"
-        ></script>
+        ></script> -->
         <script
         src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

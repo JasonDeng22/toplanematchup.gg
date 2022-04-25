@@ -8,6 +8,7 @@ function champListSearch() {
     //console.log(cards);
     let names = document.querySelectorAll('[id=name]');
     //console.log(names);
+
     // loop through all the cards. if the text content of the <p> with id="name" includes the input from
     // search bar, then include that card in the DOM. Otherwise, don't display it
 
