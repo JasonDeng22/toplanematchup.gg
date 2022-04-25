@@ -63,7 +63,7 @@ function buildTable(champ) {
         newRow = table.insertRow(table.rows.length);
         // add champ number (starting from 1)
         var newCell = newRow.insertCell(0);
-        newCell.innerHTML = "<p>" + (i + 1) + "</p>";
+        newCell.innerHTML = "<p id='chtbnx'>" + (i + 1) + "</p>";
 
         // add champ icon TODO
         var newCell = newRow.insertCell(1);
@@ -78,11 +78,11 @@ function buildTable(champ) {
 
         // add champ win rate
         var newCell = newRow.insertCell(3);
-        newCell.innerHTML = "<p>" + champs[i]["winRate"] + "%</p>";
+        newCell.innerHTML = "<p id='chtbwr'>" + champs[i]["winRate"] + "%</p>";
 
         // add champ pick rate
         var newCell = newRow.insertCell(4);
-        newCell.innerHTML = "<p>" + champs[i]["pickRate"] + "%</p>";
+        newCell.innerHTML = "<p id='chtbpr'>" + champs[i]["pickRate"] + "%</p>";
     }
 
     // since we built the table, hide all the cards
@@ -90,6 +90,7 @@ function buildTable(champ) {
     for (let i = 0; i < cards.length; i++) {
         cards[i].style.display = "none";
     }
+    save();
 }
 
 // repopulate display with cards, hide table
@@ -100,6 +101,7 @@ function buildCards() {
     }
     let champtable = document.getElementById("champtable");
     champtable.style.display = "none";
+    save();
 }
 
 function save() {

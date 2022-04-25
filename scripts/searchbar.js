@@ -2,7 +2,6 @@
 // https://stackoverflow.com/questions/5338716/get-multiple-elements-by-id
 // https://www.geeksforgeeks.org/how-to-select-all-elements-that-contains-some-specific-css-property-using-jquery/
 
-
 // this function is for the search functionality on the home page. The home page doesn't have DOM elements
 // that we can manipulate, so we will need to autocomplete / recommend searches as the user types.
 function homepageSearch() {

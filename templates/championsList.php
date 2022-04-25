@@ -90,7 +90,7 @@
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
           <li><a class="dropdown-item" onclick="alphabeticalSort();">Alphabetical (Default)</a></li>
           <li><a class="dropdown-item" onclick="winRateSort();">Highest Winrate</a></li>
-          <li><a class="dropdown-item" onclick="pickRateSort();">Highest Pickrate</a></li>
+          <li><a class="dropdown-item" onclick="pickRateSort(true);">Highest Pickrate</a></li>
         </ul>
       </div>
     </div>
@@ -120,11 +120,11 @@
           >
             <thead>
               <tr>
-                <th style="width: 5%">#</th>
+                <th id="tableIndex" style="width: 5%">#</th>
                 <th style="width: 5%"></th>
-                <th id="championsTable" onclick="alphabeticalSortTable();" style="width: 31.66%">Champions</th>
-                <th id="winrateTable" onclick="winRateSortTable();" style="width: 31.66%">Win Rate</th>
-                <th id="pickrateTable" onclick="pickRateSortTable();"style="width: 31.66%">Pick Rate</th>
+                <th id="championsTable" onclick="alphabeticalSort();" style="width: 31.66%">Champions</th>
+                <th id="winrateTable" onclick="winRateSort();" style="width: 31.66%">Win Rate</th>
+                <th id="pickrateTable" onclick="pickRateSort(true);"style="width: 31.66%">Pick Rate</th>
               </tr>
             </thead>
             <tbody style="font-weight: normal;" id="tbod"></tbody>

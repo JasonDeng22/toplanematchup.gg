@@ -23,96 +23,217 @@ $(document).ready(function () {
             $(this).removeClass("hover");
         }
     );
-
-    // for the table, add sorting for win rates and pick rates when they click on the th elements
-
-    // $("th").each()
+    $("#championsTable,#winrateTable,#pickrateTable").each(function () {
+        $(this).hover(
+            function () {
+                $(this).addClass("hover");
+            },
+            function () {
+                $(this).removeClass("hover");
+            }
+        );
+    });
 });
 
 // used for alphanumerical sorting
 // var collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
+let ascendingAlpha = true;
+let ascendingWR = false;
+let ascendingPR = false;
 
 function alphabeticalSort() {
+    var isTable = JSON.parse(localStorage.getItem("previousSetup"));
     var collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
     var input = document.getElementById('searchbar');
     input.value = input.value.toLowerCase();
-    var cards = document.getElementsByClassName('card');
-    // arrays of all the names, winrates, and pickrates of champs inside the Cards
-    let names = document.querySelectorAll('[id=name]');
+    if (isTable) {
+        // table rows + body, as well as the entire table itself
+        let tr = document.getElementsByTagName("tr"); // 0 row is the head row
+        let tbody = document.getElementsByTagName("tbody");
+        let champtable = document.getElementById("champtable");
+        let namesTable = document.querySelectorAll('[id=chtbnm]');
 
-    // extract textContents to another array to perform sorting
-    let namesArr = [];
+        let namesArr = [];
+        for (var i = 0; i < namesTable.length; i++) {
+            namesArr.push(namesTable[i].textContent);
+        }
+        if (ascendingAlpha) {
+            namesArr.sort(collator.compare);
+            ascendingAlpha = false;
+        } else {
+            namesArr.sort(collator.compare).reverse();
+            ascendingAlpha = true;
+        }
+        for (let j = 0; j < namesArr.length; j++) {
+            for (let k = 0; k < tr.length; k++) {
+                if (tr[k].textContent.includes(namesArr[j])) {
+                    $("#tbod").append(tr[k]);
+                    break;
+                }
+            }
+        }
+        // change table index numbers back to 1-n
+        let indexTable = document.querySelectorAll('[id=chtbnx]');
+        for (let x = 0; x < namesArr.length; x++) {
+            var tempStr = x + 1;
+            indexTable[x].textContent = tempStr;
+        }
+    } else {
 
-    for (var i = 0; i < names.length; i++) {
-        namesArr.push(names[i].textContent);
+        var cards = document.getElementsByClassName('card');
+        // arrays of all the names, winrates, and pickrates of champs inside the Cards
+        let names = document.querySelectorAll('[id=name]');
 
-    }
-    // console.log(namesArr);
-    // console.log(namesArr.sort(collator.compare));
-    namesArr.sort(collator.compare);
+        // extract textContents to another array to perform sorting
+        let namesArr = [];
 
-    // now, loop through all the cards and add them appropriately. Remove all the cards and add them approriately
+        for (var i = 0; i < names.length; i++) {
+            namesArr.push(names[i].textContent);
 
-    for (let j = 0; j < namesArr.length; j++) {
-        for (let k = 0; k < cards.length; k++) {
-            if (cards[k].textContent.includes(namesArr[j])) {
-                $("#rowCards").append(cards[k]);
-                break;
+        }
+        // console.log(namesArr);
+        // console.log(namesArr.sort(collator.compare));
+        namesArr.sort(collator.compare);
+
+        // now, loop through all the cards and add them appropriately. Remove all the cards and add them approriately
+
+        for (let j = 0; j < namesArr.length; j++) {
+            for (let k = 0; k < cards.length; k++) {
+                if (cards[k].textContent.includes(namesArr[j])) {
+                    $("#rowCards").append(cards[k]);
+                    break;
+                }
             }
         }
     }
 }
 
 function winRateSort() {
+    var isTable = JSON.parse(localStorage.getItem("previousSetup"));
     var collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
     var input = document.getElementById('searchbar');
     input.value = input.value.toLowerCase();
-    var cards = document.getElementsByClassName('card');
-    let winRates = document.querySelectorAll('[id=winRate]');
-    let winRatesArr = [];
-    for (var i = 0; i < winRates.length; i++) {
-        winRatesArr.push(winRates[i].textContent);
-    }
-    // console.log(winRatesArr);
-    // console.log(winRatesArr.sort(collator.compare));
-    winRatesArr.sort(collator.compare).reverse();
-    console.log(winRatesArr);
-    console.log(cards, cards.length);
+    if (isTable) {
+        // table rows + body, as well as the entire table itself
+        let tr = document.getElementsByTagName("tr"); // 0 row is the head row
+        let wrTable = document.querySelectorAll('[id=chtbwr]');
 
-    // now, loop through all the cards and add them appropriately
-    // var row = $("#rowCards").get()[0];
-    // row.children.innerHTML = "";
+        let wrArr = [];
+        for (var i = 0; i < wrTable.length; i++) {
+            wrArr.push(wrTable[i].textContent);
+        }
+        if (!ascendingWR) {
+            wrArr.sort(collator.compare).reverse();
+            ascendingWR = true;
+        } else {
+            wrArr.sort(collator.compare);
+            ascendingWR = false;
+        }
+        for (let j = 0; j < wrArr.length; j++) {
+            for (let k = 0; k < tr.length; k++) {
+                if (tr[k].textContent.includes(wrArr[j])) {
+                    $("#tbod").append(tr[k]);
+                    break;
+                }
+            }
+        }
+        // change table index numbers back to 1-n
+        let indexTable = document.querySelectorAll('[id=chtbnx]');
+        for (let x = 0; x < wrArr.length; x++) {
+            var tempStr = x + 1;
+            indexTable[x].textContent = tempStr;
+        }
 
-    for (let j = 0; j < winRates.length; j++) {
-        for (let k = 0; k < cards.length; k++) {
-            if (cards[k].textContent.includes(winRatesArr[j])) {
-                $("#rowCards").append(cards[k]); // jQuery
-                break;
+    } else {
+        var cards = document.getElementsByClassName('card');
+        let winRates = document.querySelectorAll('[id=winRate]');
+        let winRatesArr = [];
+        for (var i = 0; i < winRates.length; i++) {
+            winRatesArr.push(winRates[i].textContent);
+        }
+
+        winRatesArr.sort(collator.compare).reverse();
+
+        // now, loop through all the cards and add them appropriately
+        // var row = $("#rowCards").get()[0];
+        // row.children.innerHTML = "";
+
+        for (let j = 0; j < winRates.length; j++) {
+            for (let k = 0; k < cards.length; k++) {
+                if (cards[k].textContent.includes(winRatesArr[j])) {
+                    $("#rowCards").append(cards[k]); // jQuery
+                    break;
+                }
             }
         }
     }
 }
 
-function pickRateSort() {
+function pickRateSort(repeat) {
+    var isTable = JSON.parse(localStorage.getItem("previousSetup"));
     var collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
     var input = document.getElementById('searchbar');
     input.value = input.value.toLowerCase();
-    var cards = document.getElementsByClassName('card');
-    let pickRates = document.querySelectorAll('[id=pickRate]');
-    let pickRatesArr = [];
-    for (var i = 0; i < pickRates.length; i++) {
-        pickRatesArr.push(pickRates[i].textContent);
-    }
-    // console.log(pickRatesArr);
-    // console.log(pickRatesArr.sort(collator.compare));
-    pickRatesArr.sort(collator.compare).reverse();
+    if (isTable) {
+        // table rows + body, as well as the entire table itself
+        let tr = document.getElementsByTagName("tr"); // 0 row is the head row
+        let prTable = document.querySelectorAll('[id=chtbpr]');
 
-    for (let j = 0; j < pickRatesArr.length; j++) {
-        for (let k = 0; k < cards.length; k++) {
-            if (cards[k].textContent.includes(pickRatesArr[j])) {
-                $("#rowCards").append(cards[k]);
-                break;
+        let prArr = [];
+        for (var i = 0; i < prTable.length; i++) {
+            prArr.push(prTable[i].textContent);
+        }
+        if (!ascendingPR) {
+            prArr.sort(collator.compare).reverse();
+            if (!repeat) {
+                ascendingPR = true;
+            }
+        } else {
+            prArr.sort(collator.compare);
+            if (!repeat) {
+                ascendingPR = false;
             }
         }
+
+        for (let j = 0; j < prArr.length; j++) {
+            for (let k = 0; k < tr.length; k++) {
+                if (tr[k].textContent.includes(prArr[j])) {
+                    $("#tbod").append(tr[k]);
+                    break;
+                }
+            }
+        }
+        // change table index numbers back to 1-n
+        let indexTable = document.querySelectorAll('[id=chtbnx]');
+        for (let x = 0; x < prArr.length; x++) {
+            var tempStr = x + 1;
+            indexTable[x].textContent = tempStr;
+        }
+
+    } else {
+        var cards = document.getElementsByClassName('card');
+        let pickRates = document.querySelectorAll('[id=pickRate]');
+        let pickRatesArr = [];
+        for (var i = 0; i < pickRates.length; i++) {
+            pickRatesArr.push(pickRates[i].textContent);
+        }
+        // console.log(pickRatesArr);
+        // console.log(pickRatesArr.sort(collator.compare));
+        pickRatesArr.sort(collator.compare).reverse();
+
+        for (let j = 0; j < pickRatesArr.length; j++) {
+            for (let k = 0; k < cards.length; k++) {
+                if (cards[k].textContent.includes(pickRatesArr[j])) {
+                    $("#rowCards").append(cards[k]);
+                    break;
+                }
+            }
+        }
+    }
+
+    // for some absolutely obscure reason, I have to run the pick rate sort specifically twice or else
+    // it doesn't work correctly. the other two sorts don't need this. why??
+    if (repeat) {
+        pickRateSort(false);
     }
 }

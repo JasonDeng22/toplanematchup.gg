@@ -206,6 +206,7 @@ class MatchupController {
 
     // we will call this function for AJAX query
     public function getChamps(){
+        // $sorttype = $_GET["sorttype"];
         $champion = $this->db->query("SELECT * FROM project_champions");
         if ($champion === false){
             $error_msg = "Error getting champion";
