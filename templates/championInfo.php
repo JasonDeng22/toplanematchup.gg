@@ -59,7 +59,7 @@
               <h2 style="color: rgb(29, 172, 0)">Strong Against</h2>
               <h3><?=$champName?> is strong against these champions</h3>
             </div>
-            <div class="card-body">
+            <div id="winningMatchupBody" class="card-body">
             <!-- Print out the 6 best matchups in terms of winrate -->
             <!-- TODO: Implement sorting matchups by win rate / gold diff / kill diff -->
             <?php
@@ -99,7 +99,7 @@
               <h2 style="color: rgb(163, 0, 0)">Weak Against</h2>
               <h3><?=$champName?> is weak against these champions</h3>
             </div>
-            <div class="card-body">
+            <div id="losingMatchupBody" class="card-body">
             <!-- Print out the 6 worst matchups in terms of winrate -->
             <!-- TODO: Implement sorting matchups by win rate / gold diff / kill diff -->
             <?php

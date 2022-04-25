@@ -104,6 +104,16 @@ img {
   color: #ffc400;
 }
 
+.hover {
+  cursor: pointer;
+}
+
+table {
+  font-size: 20px;
+  font-weight: bolder;
+
+}
+
 /* .links {
   color: lightgray;
   text-decoration: none;

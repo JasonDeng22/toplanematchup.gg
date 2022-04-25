@@ -1,6 +1,6 @@
 /* Sources used:
 1)https://cs4640.cs.virginia.edu/lectures/examples/trivia-js.html
-2)
+2)https://stackoverflow.com/questions/46155/whats-the-best-way-to-validate-an-email-address-in-javascript
 3)
 4)
 5)

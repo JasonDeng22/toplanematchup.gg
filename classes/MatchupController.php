@@ -26,6 +26,9 @@ class MatchupController {
             case "championsList":
                 $this->championsList();
                 break;
+            case "getChamps":
+                $this->getChamps();
+                break;
             case "championInfo":
                 $this->championInfo();
                 break;
@@ -201,6 +204,19 @@ class MatchupController {
         include "templates/championsList.php";
     }
 
+    // we will call this function for AJAX query
+    public function getChamps(){
+        $champion = $this->db->query("SELECT * FROM project_champions");
+        if ($champion === false){
+            $error_msg = "Error getting champion";
+        }
+        if (empty($champion)){
+            header("Location:?command=pageNotFound");
+        }
+        header("Content-type: application/json");
+        echo json_encode($champion, JSON_PRETTY_PRINT);
+    }
+
     private function championInfo(){
         $_SESSION['url'] = $_SERVER['REQUEST_URI'];
         # prepare all HTML elements given a specific champ name
@@ -304,7 +320,6 @@ class MatchupController {
     private function getNumComments()
     {
         $numComm = $this->db->query("select COUNT(id) from project_comments");
-
         return $numComm;
     }
 

@@ -20,7 +20,10 @@
     />
     <link rel="stylesheet" href="./styles/champions.css" />
     <link rel="stylesheet" href="./styles/reset.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./scripts/searchbar.js"></script>
+    <script type="text/javascript" src="./scripts/sorting.js"></script>
+    <script type="text/javascript" src="./scripts/showTableOrGrid.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -69,8 +72,8 @@
           View champions by
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">Grid View (default)</a></li>
-          <li><a class="dropdown-item" href="#">Table View</a></li>
+          <li><a class="dropdown-item" onclick="buildCards();">Grid View (default)</a></li>
+          <li><a class="dropdown-item" onclick="getChamps(buildTable);">Table View</a></li>
         </ul>
       </div>
 
@@ -85,15 +88,15 @@
           Sort champions by
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">Alphabetical (Default)</a></li>
-          <li><a class="dropdown-item" href="#">Highest Winrate</a></li>
-          <li><a class="dropdown-item" href="#">Highest Pickrate</a></li>
+          <li><a class="dropdown-item" onclick="alphabeticalSort();">Alphabetical (Default)</a></li>
+          <li><a class="dropdown-item" onclick="winRateSort();">Highest Winrate</a></li>
+          <li><a class="dropdown-item" onclick="pickRateSort();">Highest Pickrate</a></li>
         </ul>
       </div>
     </div>
     <!--Champions-->
     <div class="container">
-      <div class="row">
+      <div class="row" id="rowCards">
 
         <?php
           foreach ($champions as $key=>$value){
@@ -108,11 +111,28 @@
           }
         ?>
       </div>
+
+      <div class="col-12" style="overflow-x:auto;">
+          <table
+            id="champtable"
+            class="table table-bordered table-striped table-secondary"
+            style="display:none"
+          >
+            <thead>
+              <tr>
+                <th style="width: 5%">#</th>
+                <th style="width: 5%"></th>
+                <th id="championsTable" style="width: 31.66%">Champions</th>
+                <th id="winrateTable" style="width: 31.66%">Win Rate</th>
+                <th id="pickrateTable" style="width: 31.66%">Pick Rate</th>
+              </tr>
+            </thead>
+            <tbody id="tbod"></tbody>
+          </table>
+        </div>
     </div>
     <br><br><br>
     <!-- FOOTER -->
     <?php include "footer.php"; ?>
-
-  
   </body>
 </html>
