@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -19,6 +20,7 @@
     />
     <link rel="stylesheet" href="./styles/champions.css" />
     <link rel="stylesheet" href="./styles/reset.css" />
+    <script type="text/javascript" src="./scripts/searchbar.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -36,9 +38,11 @@
           <div class="form">
             <i class="fa fa-search"></i>
             <input
+              id = "searchbar"
               type="text"
               class="form-control form-input"
               placeholder="Search any champion"
+              onkeyup="champListSearch();"
             />
             <span class="left-pan"><i class="fa fa-microphone"></i></span>
           </div>
@@ -51,9 +55,25 @@
       style="
         background-color: rgb(30, 30, 30);
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
       "
     >
+    <div class="dropdown" style="padding-top: 10px; padding-bottom: 10px">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          View champions by
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="#">Grid View (default)</a></li>
+          <li><a class="dropdown-item" href="#">Table View</a></li>
+        </ul>
+      </div>
+
       <div class="dropdown" style="padding-top: 10px; padding-bottom: 10px">
         <button
           class="btn btn-secondary dropdown-toggle"
@@ -80,8 +100,11 @@
             echo '<div class="card col-md-4">';
             echo '<img src="champArt/'.$value["name"].'.jpg" alt="A picture of'.$value["name"].'." />';
             echo '<div class="card-body">';
-            echo '<a class="links stretched-link" href="?command=championInfo&champName='.$value["name"].'">'.$value["name"].'</a>';
-            echo '<p class="card-text"></p></div></div>';
+            echo '<a class="links stretched-link" href="?command=championInfo&champName='.$value["name"].'"></a>';
+            echo '<p id="name" class="cardtext">'.$value["name"].'</p>
+                  <p id="winRate" class="cardtext">Win Rate: '.$value["winRate"].'</p>
+                  <p id="pickRate" class="cardtext">Pick Rate: '.$value["pickRate"].'</p>
+                  </div></div>';
           }
         ?>
       </div>

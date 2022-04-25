@@ -32,7 +32,6 @@ class MatchupController {
             case "matchupPage":
                 $this->matchupPage();
                 break;
-                //
             case "forum":
                 $this->forum();
                 break;

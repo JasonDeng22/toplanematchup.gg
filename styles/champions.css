@@ -3,9 +3,11 @@
 h1 {
   color: white;
 }
+
 .form {
   position: relative;
 }
+
 /* Search Bar */
 .form .fa-search {
   position: absolute;
@@ -53,12 +55,14 @@ h1 {
 body {
   background-color: rgb(30, 30, 30);
 }
+
 /* Cards */
 img {
   padding-top: 5px;
   width: auto;
   box-shadow: 0px 0px 20px black;
 }
+
 .card {
   background-color: rgb(30, 30, 30);
   padding-top: 20px;
@@ -77,14 +81,30 @@ img {
   padding-bottom: 0px;
 }
 
-.card:hover {
-  border-style: solid;
-  border-radius: 10px;
-  border-width: 2px;
-  border-color: #ffc400;
+.cardtext {
+  color: white;
+  text-align: center;
 }
 
-.links {
+.cardtext:hover {
+  color: #ffc400;
+}
+
+.card:hover {
+  outline-style: solid;
+  /* outline-radius: 10px; */
+  outline-width: 2px;
+  outline-color: #ffc400;
+  outline-offset: -3px;
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+.cardtext:hover {
+  color: #ffc400;
+}
+
+/* .links {
   color: lightgray;
   text-decoration: none;
   display: flex;
@@ -95,7 +115,7 @@ img {
   font-weight: bolder;
   color: #ffc400;
   text-decoration: underline;
-}
+} */
 
 @media (max-width: 768px) {
   .dftitle {

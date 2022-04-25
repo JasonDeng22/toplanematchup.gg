@@ -9,18 +9,22 @@ body {
   background-blend-mode: darken;
   margin-bottom: 4vh;
 }
+
 .jumbo h1 {
   color: rgb(219, 219, 219);
   font-size: calc(1.425rem + 2.1vw);
   font-weight: 300;
   line-height: 1.2;
 }
+
 .jumbo p {
   color: rgb(219, 219, 219);
   font-size: 8px;
   font-size: 1.5rem;
 }
+
 @media (max-width: 767.98px) {
+
   /*.jumbo {
     background-image: url("../champArt/Aatrox.jpg");
     background-size: cover;
@@ -29,6 +33,7 @@ body {
     color: rgb(219, 219, 219);
     font-size: calc(1.425rem + 2.1vw);
   }
+
   .jumbo p {
     color: rgb(219, 219, 219);
     font-size: 1em !important;
@@ -45,6 +50,7 @@ body {
 .card-head {
   text-align: center;
 }
+
 .card h2 {
   font-size: calc(1rem + 1.5vw);
   color: rgb(206, 206, 206);
@@ -63,12 +69,14 @@ body {
   margin: 15px 0px 20px 0px;
   align-items: center;
 }
+
 .card-body {
   width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .matchup-card {
   align-items: center;
   text-align: center;
@@ -85,6 +93,7 @@ a.name {
 a.name:hover {
   text-decoration: underline;
 }
+
 p.winRate {
   font-size: 70%;
   margin: 0px;
@@ -104,8 +113,9 @@ p.goldDiff {
 }
 
 .matchup-card:hover {
-  border-style: solid;
-  border-radius: 10px;
-  border-width: 1.2px;
-  border-color: #ffc400;
+  outline-style: solid;
+  /* outline-radius: 10px; */
+  outline-width: 1.2px;
+  outline-color: #ffc400;
+  outline-offset: -2px;
 }
