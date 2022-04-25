@@ -5,4 +5,5 @@ classes/Config.php
 composer.json
 composer.lock
 vendor/
+champArt/
 guzzle_requests.php

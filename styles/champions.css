@@ -114,6 +114,10 @@ table {
 
 }
 
+a {
+  color: black;
+}
+
 /* .links {
   color: lightgray;
   text-decoration: none;

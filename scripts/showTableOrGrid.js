@@ -69,19 +69,20 @@ function buildTable(champ) {
         var newCell = newRow.insertCell(1);
         newCell.innerHTML = '<img style="padding-top: 0px; width: auto; box-shadow: 0px 0px 0px black;" src="./champArt/' +
             champs[i]["name"] + 'Icon.png" alt="' + champs[i]["name"] +
-            '" width="25" height="25">';
+            '" width="50" height="50">';
 
-        // add champ name
+        // add champ name as link
         var newCell = newRow.insertCell(2);
-        newCell.innerHTML = "<p id='chtbnm'>" + champs[i]["name"] + "</p>";
+        newCell.innerHTML = '<a id="chtbnm" href="?command=championInfo&champName=' + champs[i]["name"] + '">' + champs[i]["name"] + '</a>';
+        // "<p id='chtbnm'>" + champs[i]["name"] + "</p>";
 
         // add champ win rate
         var newCell = newRow.insertCell(3);
-        newCell.innerHTML = "<p>" + champs[i]["winRate"] + "</p>";
+        newCell.innerHTML = "<p>" + champs[i]["winRate"] + "%</p>";
 
         // add champ pick rate
         var newCell = newRow.insertCell(4);
-        newCell.innerHTML = "<p>" + champs[i]["pickRate"] + "</p>";
+        newCell.innerHTML = "<p>" + champs[i]["pickRate"] + "%</p>";
     }
 
     // since we built the table, hide all the cards
@@ -99,4 +100,30 @@ function buildCards() {
     }
     let champtable = document.getElementById("champtable");
     champtable.style.display = "none";
+}
+
+function save() {
+    // user input and value
+    let input = document.getElementById('searchbar');
+    input.value = input.value.toLowerCase();
+    // table rows + body, as well as the entire table itself
+    let tbody = document.getElementsByTagName("tbody");
+    let champtable = document.getElementById("champtable");
+
+    var isTable; // true if table was last loaded, false if cards were last loaded
+
+    if (tbody.innerHTML != null || champtable.style.display != "none") {
+        isTable = true;
+    } else {
+        isTable = false;
+    }
+    localStorage.setItem("previousSetup", JSON.stringify(isTable));
+}
+function setup() {
+    var isTable = JSON.parse(localStorage.getItem("previousSetup"));
+    if (isTable) {
+        getChamps(buildTable);
+    } else {
+        buildCards();
+    }
 }

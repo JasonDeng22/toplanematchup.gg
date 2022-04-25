@@ -31,7 +31,7 @@
     <script src="https://cdn.jsdelivr.net/npm/less@4"></script>
   </head>
 
-  <body>
+  <body onload="setup();" onunload="save();">
     <?php include "navbar.php"; ?>
     <!--Title and Search Bar-->
     <div class="container" style="padding-bottom: 5vh">
@@ -116,18 +116,18 @@
           <table
             id="champtable"
             class="table table-bordered table-striped table-secondary"
-            style="display:none"
+            style="display:none; font-size: 20px; font-weight:bold"
           >
             <thead>
               <tr>
                 <th style="width: 5%">#</th>
                 <th style="width: 5%"></th>
-                <th id="championsTable" style="width: 31.66%">Champions</th>
-                <th id="winrateTable" style="width: 31.66%">Win Rate</th>
-                <th id="pickrateTable" style="width: 31.66%">Pick Rate</th>
+                <th id="championsTable" onclick="alphabeticalSortTable();" style="width: 31.66%">Champions</th>
+                <th id="winrateTable" onclick="winRateSortTable();" style="width: 31.66%">Win Rate</th>
+                <th id="pickrateTable" onclick="pickRateSortTable();"style="width: 31.66%">Pick Rate</th>
               </tr>
             </thead>
-            <tbody id="tbod"></tbody>
+            <tbody style="font-weight: normal;" id="tbod"></tbody>
           </table>
         </div>
     </div>
