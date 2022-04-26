@@ -23,12 +23,10 @@ Sources used: https://bbbootstrap.com/snippets/bootstrap-5-search-bar-microphone
       integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
       crossorigin="anonymous"
     />
+    <!-- <link rel="stylesheet" type="text/css" href="./styles/reset.css"/> -->
     <link rel="stylesheet" type ="text/css" href="./styles/main.css"/>
-    <link rel="stylesheet" type="text/css" href="./styles/reset.css"/>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    <link rel="stylesheet" type="text/css" href="./styles/searchbar.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/less@4"></script>
   </head>
 
@@ -37,6 +35,7 @@ Sources used: https://bbbootstrap.com/snippets/bootstrap-5-search-bar-microphone
       background: rgba(10, 10, 10, 0.5) url(backgrounds/champ.gif);
       background-size: cover;
       background-blend-mode: darken;
+      background-attachment: fixed;
     "
   >
     <?php 
@@ -53,22 +52,18 @@ Sources used: https://bbbootstrap.com/snippets/bootstrap-5-search-bar-microphone
           </h2>
         </div>
         <div class="container" style="padding-bottom: 25vh">
-          <div
-            class="row height d-flex justify-content-center align-items-center"
-          >
-            <div class="col-md-6">
-              <div class="form">
-                <i class="fa fa-search"></i>
-                <input
-                  type="text"
-                  class="form-control form-input"
-                  placeholder="Search any champion"
-                  name="champSearch"
-                />
-                <span class="left-pan"><i class="fa fa-microphone"></i></span>
-              </div>
+            <div class="wrapper">
+                <div class="search-input">
+                  <a href="" target="" hidden></a>
+                  <form onsubmit="return submits();">
+                    <input id="input" type="text" placeholder="Type to search..">
+                  </form>
+                  <div class="autocom-box">
+                    <!-- here list are inserted from javascript -->
+                  </div>
+                  <div class="icon"><i class="fas fa-search"></i></div>
+                </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
@@ -76,5 +71,7 @@ Sources used: https://bbbootstrap.com/snippets/bootstrap-5-search-bar-microphone
     <?php 
         include "footer.php";
     ?>
+    <script type="text/javascript" src="./scripts/suggestions.js"></script>
+    <script type="text/javascript" src="./scripts/searchbar.js"></script>
   </body>
 </html>

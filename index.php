@@ -2,9 +2,6 @@
 // Register the autoloader
 // load in any classes we have inside the classes folder
 
-// LINK TO UPLOADED WEBSITE:
-// https://cs4640.cs.virginia.edu/jd3pgy/hw5/
-
 /** SOURCES USED:
  *  https://www.php.net/manual/en/function.strpos.php
  *  https://www.php.net/manual/en/function.in-array.php
@@ -26,14 +23,6 @@ if (isset($_GET["command"]))
 
 session_start();
 
-// If the user's email and name are not set in the SESSION, then it's not
-// a valid session (they didn't get here from the login page),
-// so we should send them over to log in first before doing
-// anything else!
-// if (!isset($_SESSION["email"]) || !isset($_SESSION["name"])) {  
-//     // they need to see the login   
-//     $command = "login";            
-// }
 //Instantiate the controller and run
 $matchup = new MatchupController($command);
 $matchup->run();
