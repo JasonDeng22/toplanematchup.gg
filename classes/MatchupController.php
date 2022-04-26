@@ -240,10 +240,11 @@ class MatchupController {
             header("Location:?command=pageNotFound");
         }
 
-        # query to get the 6 best matchups and 6 worst matchups given a champ1
+        # query to get the n=8 best matchups, n=8 worst matchups, and all matchups given a champ1
 
         $bestMatchups = $this->db->query("SELECT * FROM project_matchups WHERE champ1 = ? ORDER BY winRate DESC LIMIT 8;","s",$champName);
         $worstMatchups = $this->db->query("SELECT * FROM project_matchups WHERE champ1 = ? ORDER BY winRate ASC LIMIT 8;","s",$champName);
+        $allMatchups = $this->db->query("SELECT * FROM project_matchups WHERE champ1 = ? ORDER BY winRate;","s",$champName);
 
         $description = $champion[0]["description"];
         $moniker = $champion[0]["moniker"];

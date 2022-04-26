@@ -41,11 +41,16 @@ let ascendingAlpha = true;
 let ascendingWR = false;
 let ascendingPR = false;
 
-function alphabeticalSort() {
-    var isTable = JSON.parse(localStorage.getItem("previousSetup"));
+function alphabeticalSort(x = false) {
+    if (x) {
+        var isTable = true;
+    }
+    else {
+        var isTable = JSON.parse(localStorage.getItem("previousSetup"));
+        var input = document.getElementById('searchbar');
+        input.value = input.value.toLowerCase();
+    }
     var collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
-    var input = document.getElementById('searchbar');
-    input.value = input.value.toLowerCase();
     if (isTable) {
         // table rows + body, as well as the entire table itself
         let tr = document.getElementsByTagName("tr"); // 0 row is the head row
@@ -108,11 +113,18 @@ function alphabeticalSort() {
     }
 }
 
-function winRateSort() {
-    var isTable = JSON.parse(localStorage.getItem("previousSetup"));
+
+// x true means we're calling this function from championInfo.php, so isTable should be automatically true
+function winRateSort(x = false) {
+    if (x) {
+        var isTable = true;
+    }
+    else {
+        var isTable = JSON.parse(localStorage.getItem("previousSetup"));
+        var input = document.getElementById('searchbar');
+        input.value = input.value.toLowerCase();
+    }
     var collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
-    var input = document.getElementById('searchbar');
-    input.value = input.value.toLowerCase();
     if (isTable) {
         // table rows + body, as well as the entire table itself
         let tr = document.getElementsByTagName("tr"); // 0 row is the head row
@@ -169,11 +181,16 @@ function winRateSort() {
     }
 }
 
-function pickRateSort(repeat) {
-    var isTable = JSON.parse(localStorage.getItem("previousSetup"));
+function pickRateSort(repeat, x = false) {
+    if (x) {
+        var isTable = true;
+    }
+    else {
+        var isTable = JSON.parse(localStorage.getItem("previousSetup"));
+        var input = document.getElementById('searchbar');
+        input.value = input.value.toLowerCase();
+    }
     var collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
-    var input = document.getElementById('searchbar');
-    input.value = input.value.toLowerCase();
     if (isTable) {
         // table rows + body, as well as the entire table itself
         let tr = document.getElementsByTagName("tr"); // 0 row is the head row
@@ -184,12 +201,20 @@ function pickRateSort(repeat) {
             prArr.push(prTable[i].textContent);
         }
         if (!ascendingPR) {
-            prArr.sort(collator.compare).reverse();
+            if (x) {
+                prArr.sort(function (a, b) { return b - a });
+            } else {
+                prArr.sort(collator.compare).reverse();
+            }
             if (!repeat) {
                 ascendingPR = true;
             }
         } else {
-            prArr.sort(collator.compare);
+            if (x) {
+                prArr.sort(function (a, b) { return a - b });
+            } else {
+                prArr.sort(collator.compare);
+            }
             if (!repeat) {
                 ascendingPR = false;
             }
@@ -234,6 +259,6 @@ function pickRateSort(repeat) {
     // for some absolutely obscure reason, I have to run the pick rate sort specifically twice or else
     // it doesn't work correctly. the other two sorts don't need this. why??
     if (repeat) {
-        pickRateSort(false);
+        pickRateSort(false, x);
     }
 }

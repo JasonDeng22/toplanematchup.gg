@@ -17,8 +17,11 @@
       integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
       crossorigin="anonymous"
     />
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./styles/champPage.css" />
     <link rel="stylesheet" href="./styles/reset.css" />
+    <script type="text/javascript" src="./scripts/showTableOrGrid.js"></script>
+    <script type="text/javascript" src="./scripts/sorting.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -47,12 +50,12 @@
           <b>Pick Rate: <?=$pr?>%</b>
         </p>
       </div>    
-    </div>
+    </div><br><br>
     <!--Matchups-->
     <div style="background-color: rgb(7, 7, 32)">
       <div class="container">
         <div class="row justify-content-evenly">
-          <p style="font-family: Helvetica; margin-top: 30px">Matchups</p>
+          <p style="font-family: Helvetica; margin-top: 30px">Featured Matchups</p>
           <!--Winning Matchups-->
           <div class="card col-md-6">
             <div class="card-head">
@@ -132,7 +135,56 @@
             ?>
             </div>
           </div>
+
+
         </div>
+      </div>
+    </div><br><br>
+    <!--Table -->
+    <div style="background-color: rgb(7, 7, 32)">
+      <div class="container">
+        <div class="row justify-content-evenly">
+          <p style="font-family: Helvetica; margin-top: 30px">All Matchups</p>
+        </div>
+        <div class="justify-content-center">
+          <button id="hide" onclick="hideTable();" style="display: flex" type="button" class="btn btn-secondary">Hide Table</button>
+          <button id="show" onclick="showTable();" style="display: none" type="button" class="btn btn-secondary">Show Table</button><br><br>
+        </div>
+        <table id="champtable" class="table table-bordered table-striped table-dark" style=" font-size: 20px; font-weight:bold">
+            <thead>
+              <tr>
+                <th id="tableIndex" style="width: 5%">#</th>
+                <th style="width: 5%"></th>
+                <th id="championsTable" onclick="alphabeticalSort(true);" style="width: 31.66%">Champions</th>
+                <th id="winrateTable" onclick="winRateSort(true);" style="width: 31.66%">Win Rate</th>
+                <!-- same id and event handler as pickrate because i dont feel like writing more code -->
+                <th id="pickrateTable" onclick="pickRateSort(true,true);"style="width: 31.66%">Gold Difference @ 15</th>
+              </tr>
+            </thead>
+            <tbody style="font-weight: normal; font-size: 20px; text-align: left" id="tbod">
+            <?php
+            $rowNum = 1;
+            foreach ($allMatchups as $key=>$value){
+              // print tr row and then appropriate td cells
+              echo "<tr>";
+              // print row number cell
+              echo "<td><span id='chtbnx'>".$rowNum."</span></td>";
+              $rowNum++;
+              // print champion icon cell
+              echo '<td><img style="padding-top: 0px; width: auto; box-shadow: 0px 0px 0px black;" src="
+              ./champArt/'.$value["champ2"].'Icon.png" alt="'.$value["champ2"].'" width="30" height="30"></td>';
+              // print champ name cell
+              echo '<td><a style="color:white:" id="chtbnm" href="?command=matchupPage&champ1='
+              .$value["champ1"].'&champ2='.$value["champ2"].'">'.$value["champ2"].'</a></td>';
+              // print champ win rate cell 
+              echo '<td><span id="chtbwr">'.$value["winRate"].'%</span></td>';
+              // print champ gold diff cell (has id of pick rate for easier sorting)
+              echo '<td><span id="chtbpr">'.$value["goldDiff"].'</span></td>';
+              // close off the row
+              echo "</tr>";
+            }
+            ?>
+        </table><br><br>
       </div>
     </div>
     <br /><br /><br /><br />

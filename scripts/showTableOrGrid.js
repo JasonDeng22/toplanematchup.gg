@@ -46,8 +46,6 @@ async function getChamps(callback) {
     var champs = await queryChamps();
     callback(champs);
 }
-
-
 // champs is a JSON object that is AJAX'ed in as a string, convert it to object using JSON_parse
 function buildTable(champ) {
     let champtable = document.getElementById("champtable");
@@ -128,4 +126,23 @@ function setup() {
     } else {
         buildCards();
     }
+}
+
+// functions for championInfo.php
+
+function hideTable() {
+    let button1 = document.getElementById("hide");
+    let button2 = document.getElementById("show");
+    button1.style.display = "none";
+    button2.style.display = "flex";
+    let table = document.getElementById("champtable");
+    table.style.display = "none";
+}
+
+function showTable() {
+    let button1 = document.getElementById("hide");
+    let button2 = document.getElementById("show");
+    button1.style.display = "flex";
+    button2.style.display = "none";
+    $('#champtable').css('display', '')
 }

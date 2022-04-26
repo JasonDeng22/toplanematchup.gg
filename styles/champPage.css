@@ -23,6 +23,10 @@ body {
   font-size: 1.5rem;
 }
 
+.hover {
+  cursor: pointer;
+}
+
 @media (max-width: 767.98px) {
 
   /*.jumbo {
@@ -118,4 +122,19 @@ p.goldDiff {
   outline-width: 1.2px;
   outline-color: #ffc400;
   outline-offset: -2px;
+}
+
+td p {
+  font-size: 20px;
+  font-weight: normal;
+  text-align: left;
+}
+
+#chtbnm {
+  color: white;
+  text-decoration: none;
+}
+
+#chtbnm:hover {
+  text-decoration: underline;
 }
