@@ -1,5 +1,5 @@
-<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top bg-dark"
-        style="width: 100%; height: 5rem;">
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top bg-dark mt-auto"
+        style="width: 100%; height: 5rem; position:relative">
     <p class="col-md-4 mb-0 text-white">&copy; 2022 John Yun & Jason Deng</p>
     <ul class="nav col-md-8 justify-content-end">
       <li class="nav-item">

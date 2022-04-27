@@ -7,7 +7,10 @@
 
 // This JS file will be where we allow users to choose whether or not to view champs in a grid-style
 // or table style. We will make an AJAX query to get all the information needed for the champions
-
+var tbl = {
+    tHead: null,
+    tBody: null
+};
 // get champs makes the AJAX call and returns the array / JSON object containing all the champs
 function queryChamps() {
     return new Promise((resolve) => {
@@ -88,6 +91,9 @@ function buildTable(champ) {
     for (let i = 0; i < cards.length; i++) {
         cards[i].style.display = "none";
     }
+    tbl.tHead = document.getElementsByTagName("thead");
+    tbl.tBody = document.getElementsByTagName("tbody");
+    localStorage.setItem("tblhtml", JSON.stringify(tbl));
     save();
 }
 
@@ -104,10 +110,11 @@ function buildCards() {
 
 function save() {
     // user input and value
+    var savedTable = JSON.parse(localStorage.getItem('tblhtml'));
     let input = document.getElementById('searchbar');
     input.value = input.value.toLowerCase();
     // table rows + body, as well as the entire table itself
-    let tbody = document.getElementsByTagName("tbody");
+    let tbody = savedTable.tBody;
     let champtable = document.getElementById("champtable");
 
     var isTable; // true if table was last loaded, false if cards were last loaded

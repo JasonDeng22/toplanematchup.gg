@@ -287,6 +287,7 @@ class MatchupController {
 
     private function forum()
     {
+        $toAdd = 'y';
         $_SESSION['url'] = $_SERVER['REQUEST_URI'];
         $allComments = $this->getAllComments();
         if (isset($_POST["comment"]) && !empty($_POST["comment"]) && !isset($_SESSION["email"]) && !isset($_SESSION["name"])) {
@@ -301,24 +302,27 @@ class MatchupController {
             $id = $this->db->query("select id from project_user where name=? and email=?;", "ss", $user["name"], $user["email"]);
             $_SESSION["id"] = $id;
         }
+        // echo $_COOKIE["addComment"];
+        if (isset($_COOKIE["addComment"])) {
+            if ($_COOKIE['addComment'] == 'x') {
+                if (isset($_POST["comment"]) && !empty($_POST["comment"]) && isset($_SESSION["email"]) && isset($_SESSION["name"])) {
+                    $comment = $_POST["comment"];
+                    $id = $this->db->query("select id from project_user where name=? and email=?;", "ss", $_SESSION["name"], $_SESSION["email"]);
+                    $_SESSION["id"] = $id;
+                    $insert = $this->db->query("insert into project_comments (userID, comment, createdOn) values (?, ?, NOW());", "is", $id[0]["id"], $comment);
 
-        if (isset($_POST["comment"]) && !empty($_POST["comment"]) && isset($_SESSION["email"]) && isset($_SESSION["name"])) {
-            $comment = $_POST["comment"];
-            $id = $this->db->query("select id from project_user where name=? and email=?;", "ss", $_SESSION["name"], $_SESSION["email"]);
-            $_SESSION["id"] = $id;
-            $insert = $this->db->query("insert into project_comments (userID, comment, createdOn) values (?, ?, NOW());", "is", $id[0]["id"], $comment);
+                    $numComm = $this->getNumComments();
+                    $allComments = $this->getAllComments();
 
-            $numComm = $this->getNumComments();
-            $allComments = $this->getAllComments();
-
-            if (!isset($insert)) {
-                echo "There was an issue with inserting the comment";
+                    if (!isset($insert)) {
+                        echo "There was an issue with inserting the comment";
+                    }
+                }
             }
         }
 
         include "templates/forum.php";
     }
-
     private function getNumComments()
     {
         $numComm = $this->db->query("select COUNT(id) from project_comments");
